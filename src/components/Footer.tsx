@@ -32,8 +32,8 @@ export const Footer = () => {
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
                 <Gamepad2 className="w-5 h-5 text-primary-foreground" />
               </div>
-              <span className="font-display font-bold text-xl text-foreground">
-                GameEvent<span className="text-accent">Pro</span>
+              <span className="font-display font-bold text-xl">
+                <span className="text-accent">ANIM</span><span className="text-foreground">UNJEU</span>
               </span>
             </a>
             <p className="text-muted-foreground mb-6 max-w-sm leading-relaxed">
