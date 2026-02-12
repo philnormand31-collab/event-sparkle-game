@@ -62,8 +62,8 @@ export const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
         >
-          Transformez vos clients en{" "}
-          <span className="gradient-text">joueurs engagés</span>
+          CONVERTISSEZ LES VISITEURS EN{" "}
+          <span className="gradient-text">CLIENTS QUALIFIÉS</span>
         </motion.h1>
 
         {/* Subheadline */}
