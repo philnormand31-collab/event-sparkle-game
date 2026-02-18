@@ -33,7 +33,7 @@ export const Footer = () => {
                 <Gamepad2 className="w-5 h-5 text-primary-foreground" />
               </div>
               <span className="font-display font-bold text-xl">
-                <span className="text-accent">ANIM</span><span className="text-foreground">UNJEU</span>
+                <span className="text-accent">LUDI</span><span className="text-foreground">GAMI</span>
               </span>
             </a>
             <p className="text-muted-foreground mb-6 max-w-sm leading-relaxed">
