@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Play } from "lucide-react";
+import { Menu, X, MonitorSmartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
@@ -25,7 +25,7 @@ export const Navbar = () => {
           {/* Logo */}
           <a href="#" className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-              <Play className="w-5 h-5 text-primary-foreground" />
+              <MonitorSmartphone className="w-5 h-5 text-primary-foreground" />
             </div>
             <span className="font-display font-bold text-xl">
               <span className="text-accent">ANIM</span><span className="text-foreground">UNJEU</span>
