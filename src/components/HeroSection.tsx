@@ -7,24 +7,24 @@ export const HeroSection = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden section-padding pt-32">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-secondary/20" />
-      <div 
+      <div
         className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full animate-pulse-glow"
-        style={{ background: "var(--gradient-glow)" }}
-      />
-      <div 
+        style={{ background: "var(--gradient-glow)" }} />
+
+      <div
         className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full animate-pulse-glow"
-        style={{ 
+        style={{
           background: "radial-gradient(ellipse at center, hsl(24 95% 53% / 0.1) 0%, transparent 70%)",
           animationDelay: "1.5s"
-        }}
-      />
+        }} />
+
 
       {/* Floating Elements */}
       <motion.div
         className="absolute top-32 right-20 hidden lg:block"
         animate={{ y: [-10, 10, -10] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      >
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
+
         <div className="glass-card p-4 rounded-2xl">
           <Trophy className="w-8 h-8 text-accent" />
         </div>
@@ -33,8 +33,8 @@ export const HeroSection = () => {
       <motion.div
         className="absolute bottom-40 left-20 hidden lg:block"
         animate={{ y: [10, -10, 10] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      >
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}>
+
         <div className="glass-card p-4 rounded-2xl">
           <Zap className="w-8 h-8 text-primary" />
         </div>
@@ -47,8 +47,8 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 glass-card px-4 py-2 rounded-full mb-8"
-        >
+          className="inline-flex items-center gap-2 glass-card px-4 py-2 rounded-full mb-8">
+
           <Sparkles className="w-4 h-4 text-accent" />
           <span className="text-sm font-medium text-muted-foreground">
             Leader de la gamification marketing
@@ -60,8 +60,8 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
-        >
+          className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+
           CONVERTISSEZ LES VISITEURS EN{" "}
           <span className="gradient-text">CLIENTS QUALIFIÉS</span>
         </motion.h1>
@@ -71,10 +71,10 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
-        >
-          Boostez la fidélité et le trafic de vos commerces grâce à nos solutions 
-          de jeux digitaux et événements gamifiés sur mesure.
+          className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">Boostez le trafic de vos commerces et la fidélité clients grâce à nos solutions de jeux digitaux et événements gamifiés sur mesure.
+
+
+
         </motion.p>
 
         {/* CTA Buttons */}
@@ -82,8 +82,8 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
+          className="flex flex-col sm:flex-row items-center justify-center gap-4">
+
           <Button variant="hero" size="xl" className="group">
             Demander une démo gratuite
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -98,15 +98,15 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12"
-        >
+          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
+
           {[
-            { value: "500+", label: "Événements réalisés" },
-            { value: "2M+", label: "Participants" },
-            { value: "+45%", label: "Engagement client" },
-            { value: "98%", label: "Satisfaction" },
-          ].map((stat, index) => (
-            <div key={index} className="text-center">
+          { value: "500+", label: "Événements réalisés" },
+          { value: "2M+", label: "Participants" },
+          { value: "+45%", label: "Engagement client" },
+          { value: "98%", label: "Satisfaction" }].
+          map((stat, index) =>
+          <div key={index} className="text-center">
               <div className="font-display text-3xl md:text-4xl font-bold gradient-text-accent">
                 {stat.value}
               </div>
@@ -114,9 +114,9 @@ export const HeroSection = () => {
                 {stat.label}
               </div>
             </div>
-          ))}
+          )}
         </motion.div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
