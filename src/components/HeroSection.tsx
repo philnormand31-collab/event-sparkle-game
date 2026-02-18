@@ -71,7 +71,7 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">Boostez le trafic de vos commerces et la fidélité clients grâce à nos solutions de jeux digitaux et événements gamifiés sur mesure.
+          className="text-lg sm:text-xl max-w-2xl mx-auto mb-10 text-muted-foreground">Boostez le trafic de vos commerces et la fidélité clients grâce à nos solutions de jeux digitaux et événements gamifiés en présentiel
 
 
 
