@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
-import { Smartphone, Users, Trophy, Target, ArrowUpRight } from "lucide-react";
+import { Smartphone, Users, Trophy, QrCode, ArrowUpRight } from "lucide-react";
 
 const services = [
   {
-    icon: Target,
-    title: "Programme de Gamification",
+    icon: QrCode,
+    title: "Event LIVECODE",
+    titleRender: () => (<>Event <span className="text-foreground">LIVE</span><span className="text-accent">CODE</span></>),
     description:
       "Créez des programmes de fidélité gamifiés sur mesure pour engager vos clients et augmenter leur fréquence de visite.",
     features: ["Système de points", "Badges & récompenses", "Classements"],
@@ -111,7 +112,7 @@ export const ServicesSection = () => {
                 {/* Title */}
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-display text-2xl font-bold text-foreground">
-                    {service.title}
+                    {service.titleRender ? service.titleRender() : service.title}
                   </h3>
                   <ArrowUpRight className="w-6 h-6 text-muted-foreground group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
                 </div>
