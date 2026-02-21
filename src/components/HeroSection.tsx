@@ -1,9 +1,15 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Zap, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BookingDialog } from "@/components/BookingDialog";
 
 export const HeroSection = () => {
+  const [bookingOpen, setBookingOpen] = useState(false);
+
   return (
+    <>
+    <BookingDialog open={bookingOpen} onOpenChange={setBookingOpen} />
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden section-padding pt-32">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-secondary/20" />
@@ -84,7 +90,7 @@ export const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4">
 
-          <Button variant="hero" size="xl" className="group">
+          <Button variant="hero" size="xl" className="group" onClick={() => setBookingOpen(true)}>
             Demander une démo gratuite
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Button>
@@ -117,6 +123,8 @@ export const HeroSection = () => {
           )}
         </motion.div>
       </div>
-    </section>);
+    </section>
+    </>
+  );
 
 };

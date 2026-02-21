@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, MonitorSmartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BookingDialog } from "@/components/BookingDialog";
 
 const navLinks = [
 { name: "Services", href: "#services" },
@@ -12,8 +13,11 @@ const navLinks = [
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   return (
+    <>
+    <BookingDialog open={bookingOpen} onOpenChange={setBookingOpen} />
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -47,7 +51,7 @@ export const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button variant="hero" size="lg">
+            <Button variant="hero" size="lg" onClick={() => setBookingOpen(true)}>
               Demander une démo
             </Button>
           </div>
@@ -82,7 +86,7 @@ export const Navbar = () => {
                     {link.name}
                   </a>
               )}
-                <Button variant="hero" size="lg" className="mt-4 w-full">
+                <Button variant="hero" size="lg" className="mt-4 w-full" onClick={() => { setBookingOpen(true); setIsOpen(false); }}>
                   Demander une démo
                 </Button>
               </div>
@@ -90,6 +94,8 @@ export const Navbar = () => {
           }
         </AnimatePresence>
       </div>
-    </motion.nav>);
+    </motion.nav>
+    </>
+  );
 
 };
