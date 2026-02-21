@@ -1,4 +1,4 @@
-import { Gamepad2, Mail, Phone, MapPin, Linkedin, Twitter, Instagram } from "lucide-react";
+import { MonitorSmartphone, Mail, Phone, MapPin, Linkedin, Twitter, Instagram } from "lucide-react";
 
 const footerLinks = {
   services: [
@@ -30,7 +30,7 @@ export const Footer = () => {
           <div className="lg:col-span-2">
             <a href="#" className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <Gamepad2 className="w-5 h-5 text-primary-foreground" />
+                <MonitorSmartphone className="w-5 h-5 text-primary-foreground" />
               </div>
               <span className="font-display font-bold text-xl">
                 <span className="text-accent">LUDI</span><span className="text-foreground">GAMI</span>
@@ -115,7 +115,7 @@ export const Footer = () => {
         {/* Bottom */}
         <div className="pt-8 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © 2024 GameEventPro. Tous droits réservés.
+            © 2024 LUDIGAMI. Tous droits réservés.
           </p>
           <div className="flex items-center gap-4">
             <a

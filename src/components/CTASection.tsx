@@ -1,9 +1,15 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BookingDialog } from "@/components/BookingDialog";
 
 export const CTASection = () => {
+  const [bookingOpen, setBookingOpen] = useState(false);
+
   return (
+    <>
+    <BookingDialog open={bookingOpen} onOpenChange={setBookingOpen} />
     <section id="contact" className="section-padding relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-secondary/20 to-background" />
@@ -49,7 +55,7 @@ export const CTASection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button variant="hero" size="xl" className="group w-full sm:w-auto">
+            <Button variant="hero" size="xl" className="group w-full sm:w-auto" onClick={() => setBookingOpen(true)}>
               Réserver ma démo gratuite
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
@@ -79,5 +85,6 @@ export const CTASection = () => {
         </motion.div>
       </div>
     </section>
+    </>
   );
 };
