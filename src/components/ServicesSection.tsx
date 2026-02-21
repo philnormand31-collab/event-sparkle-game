@@ -1,15 +1,15 @@
 import { motion } from "framer-motion";
-import { Smartphone, Users, Trophy, QrCode, ArrowUpRight } from "lucide-react";
+import { Smartphone, Users, Trophy, QrCode, ArrowUpRight, Monitor } from "lucide-react";
 
 const services = [
   {
     icon: QrCode,
     title: "Event LIVECODE",
     titleRender: () => (<>Event <span className="text-foreground">LIVE</span><span className="text-accent">CODE</span></>),
-    description:
-      "Créez des programmes de fidélité gamifiés sur mesure pour engager vos clients et augmenter leur fréquence de visite.",
-    features: ["Système de points", "Badges & récompenses", "Classements"],
+    description: "",
+    features: [],
     gradient: "from-primary to-blue-400",
+    compact: true,
   },
   {
     icon: Smartphone,
@@ -94,7 +94,7 @@ export const ServicesSection = () => {
             <motion.div
               key={index}
               variants={cardVariants}
-              className="group glass-card rounded-3xl p-8 card-hover cursor-pointer relative overflow-hidden"
+              className={`group glass-card rounded-3xl p-8 card-hover cursor-pointer relative overflow-hidden ${service.compact ? 'py-5' : ''}`}
             >
               {/* Gradient overlay on hover */}
               <div
@@ -104,9 +104,16 @@ export const ServicesSection = () => {
               <div className="relative z-10">
                 {/* Icon */}
                 <div
-                  className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-6`}
+                  className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center ${service.compact ? 'mb-3' : 'mb-6'}`}
                 >
-                  <service.icon className="w-7 h-7 text-white" />
+                  {service.compact ? (
+                    <div className="relative w-7 h-7">
+                      <Monitor className="w-7 h-7 text-white absolute inset-0" />
+                      <QrCode className="w-3 h-3 text-white absolute top-[5px] left-1/2 -translate-x-1/2" />
+                    </div>
+                  ) : (
+                    <service.icon className="w-7 h-7 text-white" />
+                  )}
                 </div>
 
                 {/* Title */}
@@ -118,21 +125,25 @@ export const ServicesSection = () => {
                 </div>
 
                 {/* Description */}
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  {service.description}
-                </p>
+                {service.description && (
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    {service.description}
+                  </p>
+                )}
 
                 {/* Features */}
-                <div className="flex flex-wrap gap-2">
-                  {service.features.map((feature, featureIndex) => (
-                    <span
-                      key={featureIndex}
-                      className="px-3 py-1 rounded-full text-sm font-medium bg-secondary/50 text-muted-foreground"
-                    >
-                      {feature}
-                    </span>
-                  ))}
-                </div>
+                {service.features.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {service.features.map((feature, featureIndex) => (
+                      <span
+                        key={featureIndex}
+                        className="px-3 py-1 rounded-full text-sm font-medium bg-secondary/50 text-muted-foreground"
+                      >
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}
