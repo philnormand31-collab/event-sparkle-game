@@ -48,7 +48,7 @@ export const BookingDialog = ({ open, onOpenChange }: BookingDialogProps) => {
       <DialogContent className="sm:max-w-[500px] bg-card border-border">
         <DialogHeader>
           <DialogTitle className="font-display text-xl">
-            Réserver une démo gratuite
+            Réservez votre visio
           </DialogTitle>
           <DialogDescription>
             Choisissez une date et un créneau horaire pour votre démonstration personnalisée.
