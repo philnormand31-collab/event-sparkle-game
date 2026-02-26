@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Smartphone, Users, Trophy, QrCode, ArrowUpRight, Monitor, TabletSmartphone } from "lucide-react";
+import { ServicePopup } from "./ServicePopup";
 
 const services = [
 {
@@ -87,7 +89,11 @@ const cardVariants = {
 };
 
 export const ServicesSection = () => {
+  const [mobilplayOpen, setMobilplayOpen] = useState(false);
+  const mobilplayService = services[2]; // Event MOBILPLAY
+
   return (
+    <>
     <section id="services" className="section-padding relative">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-secondary/20 to-background" />
@@ -121,6 +127,9 @@ export const ServicesSection = () => {
           <motion.div
             key={index}
             variants={cardVariants}
+            onClick={() => {
+              if (service.title === "Event MOBILPLAY") setMobilplayOpen(true);
+            }}
             className={`group glass-card rounded-3xl p-8 card-hover cursor-pointer relative overflow-hidden ${service.compact ? 'py-5' : ''}`}>
 
               {/* Gradient overlay on hover */}
@@ -197,6 +206,15 @@ export const ServicesSection = () => {
           )}
         </motion.div>
       </div>
-    </section>);
+    </section>
 
+    <ServicePopup
+      open={mobilplayOpen}
+      onOpenChange={setMobilplayOpen}
+      title={mobilplayService.titleRender ? mobilplayService.titleRender() : mobilplayService.title}
+      gradient={mobilplayService.gradient}
+      iconRender={mobilplayService.iconRender}
+    />
+    </>
+  );
 };
