@@ -92,7 +92,7 @@ export const HeroSection = () => {
           className="flex flex-col sm:flex-row items-center justify-center gap-4">
 
           <Button variant="hero" size="xl" className="group" onClick={() => setBookingOpen(true)}>
-            Demander une démo gratuite
+            Une visio avec un pro ?
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Button>
           <Button variant="glass" size="xl">
