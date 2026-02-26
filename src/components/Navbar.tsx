@@ -2,13 +2,13 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, MonitorSmartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { BookingDialog } from "@/components/BookingDialog";
+import { ContactDialog } from "@/components/ContactDialog";
 
 const navLinks = [
 { name: "Services", href: "#services" },
 { name: "Comment ça marche", href: "#how-it-works" },
 { name: "Avantages", href: "#benefits" },
-{ name: "Contact", href: "#contact" }];
+{ name: "Contact", href: "#contact", isContact: true }] as const;
 
 
 export const Navbar = () => {
@@ -17,7 +17,7 @@ export const Navbar = () => {
 
   return (
     <>
-    <BookingDialog open={bookingOpen} onOpenChange={setBookingOpen} />
+    <ContactDialog open={bookingOpen} onOpenChange={setBookingOpen} />
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -42,7 +42,13 @@ export const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
-              className="text-muted-foreground hover:text-foreground transition-colors duration-300 text-sm font-medium">
+              onClick={(e) => {
+                if ('isContact' in link && link.isContact) {
+                  e.preventDefault();
+                  setBookingOpen(true);
+                }
+              }}
+              className="text-muted-foreground hover:text-foreground transition-colors duration-300 text-sm font-medium cursor-pointer">
 
                 {link.name}
               </a>
@@ -76,12 +82,18 @@ export const Navbar = () => {
             className="md:hidden mt-4 glass-card rounded-2xl p-6">
 
               <div className="flex flex-col gap-4">
-                {navLinks.map((link) =>
+              {navLinks.map((link) =>
               <a
                 key={link.name}
                 href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="text-muted-foreground hover:text-foreground transition-colors duration-300 text-base font-medium py-2">
+                onClick={(e) => {
+                  if ('isContact' in link && link.isContact) {
+                    e.preventDefault();
+                    setBookingOpen(true);
+                  }
+                  setIsOpen(false);
+                }}
+                className="text-muted-foreground hover:text-foreground transition-colors duration-300 text-base font-medium py-2 cursor-pointer">
 
                     {link.name}
                   </a>
