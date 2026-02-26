@@ -117,9 +117,9 @@ export const ServicesSection = () => {
                     <div
                       className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center shrink-0`}>
                       {service.iconRender ? service.iconRender() :
-                        <div className="relative w-11 h-11">
-                          <Monitor className="w-11 h-11 text-white absolute inset-0" />
-                          <QrCode className="w-5 h-5 text-white absolute top-[7px] left-1/2 -translate-x-1/2" />
+                        <div className="relative w-14 h-14">
+                          <Monitor className="w-14 h-14 text-white absolute inset-0" />
+                          <QrCode className="w-6 h-6 text-white absolute top-[8px] left-1/2 -translate-x-1/2" />
                         </div>
                       }
                     </div>
