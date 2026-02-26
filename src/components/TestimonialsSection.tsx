@@ -20,8 +20,8 @@ const testimonials = [
   },
   {
     name: "Charlotte CHARLIER",
-    role: "Responsable Animation",
-    company: "Centre Commercial Étoile",
+    role: "Responsable communication, animations",
+    company: "Centre Commercial TEMPO",
     content:
       "L'équipe est réactive et créative. Nos animations en présentiel sont toujours un succès auprès de nos commerçants galerie.",
     rating: 5,
