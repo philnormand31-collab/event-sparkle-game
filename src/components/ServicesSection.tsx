@@ -5,6 +5,7 @@ import { ServicePopup } from "./ServicePopup";
 
 const services = [
 {
+  serviceKey: "livecode",
   icon: QrCode,
   title: "Event LIVECODE",
   titleRender: () => <>Event <span className="text-foreground">LIVE</span><span className="text-accent">CODE</span></>,
@@ -20,6 +21,7 @@ const services = [
   )
 },
 {
+  serviceKey: "numericode",
   icon: Smartphone,
   title: "Event NUMERICODE",
   titleRender: () => <>Event <span className="text-foreground">NUMERI</span><span className="text-accent">CODE</span></>,
@@ -35,6 +37,7 @@ const services = [
   )
 },
 {
+  serviceKey: "mobilplay",
   icon: Users,
   title: "Event MOBILPLAY",
   titleRender: () => <>Event <span className="text-foreground">MOBIL</span><span className="text-accent">PLAY</span></>,
@@ -54,6 +57,7 @@ const services = [
   )
 },
 {
+  serviceKey: "playcorner",
   icon: Trophy,
   title: "Event PLAYCORNER",
   titleRender: () => <>Event <span className="text-foreground">PLAY</span><span className="text-accent">CORNER</span></>,
@@ -194,6 +198,7 @@ export const ServicesSection = () => {
         onOpenChange={(open) => { if (!open) setOpenIndex(null); }}
         title={service.titleRender ? service.titleRender() : service.title}
         gradient={service.gradient}
+        serviceKey={service.serviceKey}
         iconRender={service.iconRender}
       />
     ))}
