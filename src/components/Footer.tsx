@@ -4,8 +4,8 @@ const footerLinks = {
   services: [
   { name: "Event LIVECODE", href: "#" },
   { name: "Event NUMERICODE", href: "#" },
-  { name: "Inscription Smartphone", href: "#" },
-  { name: "Jeux en Présentiel", href: "#" }],
+  { name: "Event MOBILPLAY", href: "#" },
+  { name: "Event PLAYCORNER", href: "#" }],
 
   company: [
   { name: "À propos", href: "#" },
