@@ -49,9 +49,11 @@ export const CTASection = () => {
             jeu ?
           </h2>
 
+          <p className="text-muted-foreground text-lg mb-2 max-w-2xl mx-auto">
+            Pas de blabla, ce que vous souhaitez, ce sont des résultats.
+          </p>
           <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">
-            Rejoignez les 500+ commerces qui ont déjà transformé leur relation
-            client. Obtenez une démo personnalisée en 24h.
+            Une visio avec un spécialiste pour tout savoir, même le prix !
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
