@@ -52,7 +52,7 @@ export const Navbar = () => {
           {/* CTA Button */}
           <div className="hidden md:block">
             <Button variant="hero" size="lg" onClick={() => setBookingOpen(true)}>
-              Demander une démo
+              En savoir plus
             </Button>
           </div>
 
