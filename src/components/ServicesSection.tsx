@@ -58,7 +58,19 @@ const services = [
   description: "",
   features: [],
   gradient: "from-purple-500 to-pink-400",
-  compact: true
+  compact: true,
+  iconRender: () => (
+    <div className="relative w-14 h-14 flex flex-col items-center justify-end">
+      {/* Écran de la borne */}
+      <div className="w-10 h-7 border-2 border-white rounded-sm relative flex items-center justify-center mb-[2px]">
+        <Trophy className="w-4 h-4 text-white" />
+      </div>
+      {/* Pied de la borne */}
+      <div className="w-2 h-2 bg-white/80 rounded-sm" />
+      {/* Base */}
+      <div className="w-6 h-[3px] bg-white/80 rounded-full" />
+    </div>
+  )
 }];
 
 
