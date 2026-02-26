@@ -43,7 +43,7 @@ export const TestimonialsSection = () => {
           className="text-center mb-16"
         >
           <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-            Ce que disent nos <span className="gradient-text-accent">clients</span>
+            C'est toujours nos <span className="gradient-text-accent">clients</span> qui en parlent le mieux
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Découvrez les retours d'expérience de commerçants qui nous font confiance.
