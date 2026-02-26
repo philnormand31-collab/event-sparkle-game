@@ -23,7 +23,7 @@ const testimonials = [
     role: "Responsable Animation",
     company: "Centre Commercial Étoile",
     content:
-      "L'équipe est réactive et créative. Nos animations en présentiel sont toujours un succès auprès des familles.",
+      "L'équipe est réactive et créative. Nos animations en présentiel sont toujours un succès auprès de nos commerçants galerie.",
     rating: 5,
   },
 ];
