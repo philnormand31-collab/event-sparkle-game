@@ -19,7 +19,7 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: "Sophie Bernard",
+    name: "Charlotte CHARLIER",
     role: "Responsable Animation",
     company: "Centre Commercial Étoile",
     content:
