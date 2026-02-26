@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Smartphone, Users, Trophy, QrCode, ArrowUpRight, Monitor } from "lucide-react";
+import { Smartphone, Users, Trophy, QrCode, ArrowUpRight, Monitor, TabletSmartphone } from "lucide-react";
 
 const services = [
 {
@@ -60,16 +60,7 @@ const services = [
   gradient: "from-purple-500 to-pink-400",
   compact: true,
   iconRender: () => (
-    <div className="relative w-14 h-14 flex flex-col items-center justify-end">
-      {/* Écran de la borne */}
-      <div className="w-10 h-7 border-2 border-white rounded-sm relative flex items-center justify-center mb-[2px]">
-        <Trophy className="w-4 h-4 text-white" />
-      </div>
-      {/* Pied de la borne */}
-      <div className="w-2 h-2 bg-white/80 rounded-sm" />
-      {/* Base */}
-      <div className="w-6 h-[3px] bg-white/80 rounded-full" />
-    </div>
+    <TabletSmartphone className="w-14 h-14 text-white" />
   )
 }];
 
