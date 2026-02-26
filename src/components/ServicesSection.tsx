@@ -31,11 +31,12 @@ const services = [
 },
 {
   icon: Trophy,
-  title: "Jeux en Présentiel",
-  description:
-  "Animations événementielles gamifiées pour créer des moments mémorables dans vos points de vente.",
-  features: ["Bornes interactives", "Animations live", "Lots & cadeaux"],
-  gradient: "from-purple-500 to-pink-400"
+  title: "Event PLAYCORNER",
+  titleRender: () => <>Event <span className="text-foreground">PLAY</span><span className="text-accent">CORNER</span></>,
+  description: "",
+  features: [],
+  gradient: "from-purple-500 to-pink-400",
+  compact: true
 }];
 
 
