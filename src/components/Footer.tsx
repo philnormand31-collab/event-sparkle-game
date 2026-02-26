@@ -1,4 +1,4 @@
-import { MonitorSmartphone, Mail, Phone, MapPin, Linkedin, Twitter, Instagram } from "lucide-react";
+import { MonitorSmartphone, Mail, Phone, MapPin, Linkedin, Facebook, Instagram } from "lucide-react";
 
 const footerLinks = {
   services: [
@@ -127,7 +127,7 @@ export const Footer = () => {
               href="#"
               className="w-10 h-10 rounded-full bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary transition-all">
 
-              <Twitter className="w-4 h-4" />
+              <Facebook className="w-4 h-4" />
             </a>
             <a
               href="#"
