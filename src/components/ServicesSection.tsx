@@ -89,8 +89,7 @@ const cardVariants = {
 };
 
 export const ServicesSection = () => {
-  const [mobilplayOpen, setMobilplayOpen] = useState(false);
-  const mobilplayService = services[2]; // Event MOBILPLAY
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <>
@@ -127,35 +126,21 @@ export const ServicesSection = () => {
           <motion.div
             key={index}
             variants={cardVariants}
-            onClick={() => {
-              if (service.title === "Event MOBILPLAY") setMobilplayOpen(true);
-            }}
+            onClick={() => setOpenIndex(index)}
             className={`group glass-card rounded-3xl p-8 card-hover cursor-pointer relative overflow-hidden ${service.compact ? 'py-5' : ''}`}>
 
               {/* Gradient overlay on hover */}
               <div className="" />
 
-
-
               <div className="relative z-10">
                 {service.compact ? (
                   <div className="flex items-center gap-5">
-                    {/* Large Icon */}
                     <div
                       className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center shrink-0`}>
                       {service.iconRender ? service.iconRender() :
-                        <div className="relative w-14 h-14 flex items-center justify-center">
-                          <Smartphone className="w-14 h-14 text-white absolute inset-0" />
-                          <QrCode className="w-6 h-6 text-white relative -mt-1" />
-                          <div className="absolute bottom-[2px] left-1/2 -translate-x-1/2 flex gap-[3px]">
-                            <span className="w-[5px] h-[5px] rounded-full bg-white/80" />
-                            <span className="w-[5px] h-[5px] rounded-full bg-white/80" />
-                            <span className="w-[5px] h-[5px] rounded-full bg-white/80" />
-                          </div>
-                        </div>
+                        <service.icon className="w-7 h-7 text-white" />
                       }
                     </div>
-                    {/* Title next to icon */}
                     <div className="flex items-center justify-between flex-1">
                       <h3 className="font-display text-2xl font-bold text-foreground">
                         {service.titleRender ? service.titleRender() : service.title}
@@ -165,13 +150,10 @@ export const ServicesSection = () => {
                   </div>
                 ) : (
                   <>
-                    {/* Icon */}
                     <div
                       className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-6`}>
                       <service.icon className="w-7 h-7 text-white" />
                     </div>
-
-                    {/* Title */}
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="font-display text-2xl font-bold text-foreground">
                         {service.titleRender ? service.titleRender() : service.title}
@@ -181,21 +163,18 @@ export const ServicesSection = () => {
                   </>
                 )}
 
-                {/* Description */}
                 {service.description &&
               <p className="text-muted-foreground mb-6 leading-relaxed">
                     {service.description}
                   </p>
               }
 
-                {/* Features */}
                 {service.features.length > 0 &&
               <div className="flex flex-wrap gap-2">
                     {service.features.map((feature, featureIndex) =>
                 <span
                   key={featureIndex}
                   className="px-3 py-1 rounded-full text-sm font-medium bg-secondary/50 text-muted-foreground">
-
                         {feature}
                       </span>
                 )}
@@ -208,13 +187,16 @@ export const ServicesSection = () => {
       </div>
     </section>
 
-    <ServicePopup
-      open={mobilplayOpen}
-      onOpenChange={setMobilplayOpen}
-      title={mobilplayService.titleRender ? mobilplayService.titleRender() : mobilplayService.title}
-      gradient={mobilplayService.gradient}
-      iconRender={mobilplayService.iconRender}
-    />
+    {services.map((service, index) => (
+      <ServicePopup
+        key={index}
+        open={openIndex === index}
+        onOpenChange={(open) => { if (!open) setOpenIndex(null); }}
+        title={service.titleRender ? service.titleRender() : service.title}
+        gradient={service.gradient}
+        iconRender={service.iconRender}
+      />
+    ))}
     </>
   );
 };
