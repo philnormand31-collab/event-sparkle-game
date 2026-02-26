@@ -5,7 +5,7 @@ const benefits = [
   {
     icon: TrendingUp,
     title: "Augmentation de trafic et de C.A",
-    description: "Attirez plus de visiteurs grâce à des campagnes ludiques et virales.",
+    description: "Attirez plus de clients, augmentez le temps et le taux de visite de vos clients fidèles, utilisez nos méthodes et augmentez le panier moyen.",
   },
   {
     icon: Users,
