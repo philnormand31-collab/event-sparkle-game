@@ -102,7 +102,7 @@ export const ServicesSection = () => {
           className="text-center mb-16">
 
           <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-            <span className="text-accent">LUDI</span><span className="text-foreground">GAMI</span> se plie en <span className="gradient-text">quatre</span> <br />pour la réussite de votre projet !
+            <span className="text-accent">LUDI</span><span className="text-foreground">GAMI</span> se plie en <span className="gradient-text">quatre</span> <br />pour la réussite de votre événement !
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Quelle est la solution la plus adaptée à votre projet ?
