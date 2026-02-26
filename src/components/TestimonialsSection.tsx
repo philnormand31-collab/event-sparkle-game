@@ -7,7 +7,7 @@ const testimonials = [
     role: "Directrice Marketing",
     company: "Boulangerie Les Délices",
     content:
-      "Je fais appel à Philippe et son équipe chaque année pour des opérations ponctuelles et thématiques en galerie comme le BLACK FRIDAY ou la fête des mères, les clients aiment jouer !",
+      "J'organise régulièrement des événements interactifs avec LUDIGAMI sur des thèmes forts comme le BLACK FRIDAY, le jeu en live sur écran déclenché par le smartphone, pas de coupons de jeu à gérer, un jeu autonome, un contrôle des gains et des DATA, rien ne manque !",
     rating: 5,
   },
   {
