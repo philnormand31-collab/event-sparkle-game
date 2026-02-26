@@ -111,28 +111,43 @@ export const ServicesSection = () => {
 
 
               <div className="relative z-10">
-                {/* Icon */}
-                <div
-                className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center ${service.compact ? 'mb-3' : 'mb-6'}`}>
+                {service.compact ? (
+                  <div className="flex items-center gap-5">
+                    {/* Large Icon */}
+                    <div
+                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center shrink-0`}>
+                      {service.iconRender ? service.iconRender() :
+                        <div className="relative w-9 h-9">
+                          <Monitor className="w-9 h-9 text-white absolute inset-0" />
+                          <QrCode className="w-4 h-4 text-white absolute top-[6px] left-1/2 -translate-x-1/2" />
+                        </div>
+                      }
+                    </div>
+                    {/* Title next to icon */}
+                    <div className="flex items-center justify-between flex-1">
+                      <h3 className="font-display text-2xl font-bold text-foreground">
+                        {service.titleRender ? service.titleRender() : service.title}
+                      </h3>
+                      <ArrowUpRight className="w-6 h-6 text-muted-foreground group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    {/* Icon */}
+                    <div
+                      className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-6`}>
+                      <service.icon className="w-7 h-7 text-white" />
+                    </div>
 
-                  {service.iconRender ? service.iconRender() :
-                  service.compact ?
-                <div className="relative w-7 h-7">
-                      <Monitor className="w-7 h-7 text-white absolute inset-0" />
-                      <QrCode className="w-3 h-3 text-white absolute top-[5px] left-1/2 -translate-x-1/2" />
-                    </div> :
-
-                <service.icon className="w-7 h-7 text-white" />
-                }
-                </div>
-
-                {/* Title */}
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-display text-2xl font-bold text-foreground">
-                    {service.titleRender ? service.titleRender() : service.title}
-                  </h3>
-                  <ArrowUpRight className="w-6 h-6 text-muted-foreground group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
-                </div>
+                    {/* Title */}
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="font-display text-2xl font-bold text-foreground">
+                        {service.titleRender ? service.titleRender() : service.title}
+                      </h3>
+                      <ArrowUpRight className="w-6 h-6 text-muted-foreground group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+                    </div>
+                  </>
+                )}
 
                 {/* Description */}
                 {service.description &&
