@@ -50,8 +50,7 @@ export const HowItWorksSection = () => {
             Comment ça <span className="gradient-text-accent">marche</span> ?
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Un processus simple et efficace pour lancer votre programme de
-            gamification en quelques semaines.
+            Un processus simple, rapide et efficace pour lancer votre événement digital en présentiel en quelques jours !
           </p>
         </motion.div>
 
