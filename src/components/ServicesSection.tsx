@@ -2,49 +2,49 @@ import { motion } from "framer-motion";
 import { Smartphone, Users, Trophy, QrCode, ArrowUpRight, Monitor } from "lucide-react";
 
 const services = [
-  {
-    icon: QrCode,
-    title: "Event LIVECODE",
-    titleRender: () => (<>Event <span className="text-foreground">LIVE</span><span className="text-accent">CODE</span></>),
-    description: "",
-    features: [],
-    gradient: "from-primary to-blue-400",
-    compact: true,
-  },
-  {
-    icon: Smartphone,
-    title: "Jeux Digitaux",
-    description:
-      "Des jeux mobiles personnalisés à votre marque pour captiver votre audience et collecter des données précieuses.",
-    features: ["Roue de la fortune", "Quiz interactifs", "Scratch cards"],
-    gradient: "from-accent to-orange-400",
-  },
-  {
-    icon: Users,
-    title: "Inscription Smartphone",
-    description:
-      "Solution d'inscription instantanée via QR code pour simplifier la participation et enrichir votre base clients.",
-    features: ["QR code dynamique", "Inscription en 30s", "RGPD compliant"],
-    gradient: "from-emerald-500 to-teal-400",
-  },
-  {
-    icon: Trophy,
-    title: "Jeux en Présentiel",
-    description:
-      "Animations événementielles gamifiées pour créer des moments mémorables dans vos points de vente.",
-    features: ["Bornes interactives", "Animations live", "Lots & cadeaux"],
-    gradient: "from-purple-500 to-pink-400",
-  },
-];
+{
+  icon: QrCode,
+  title: "Event LIVECODE",
+  titleRender: () => <>Event <span className="text-foreground">LIVE</span><span className="text-accent">CODE</span></>,
+  description: "",
+  features: [],
+  gradient: "from-primary to-blue-400",
+  compact: true
+},
+{
+  icon: Smartphone,
+  title: "Jeux Digitaux",
+  description:
+  "Des jeux mobiles personnalisés à votre marque pour captiver votre audience et collecter des données précieuses.",
+  features: ["Roue de la fortune", "Quiz interactifs", "Scratch cards"],
+  gradient: "from-accent to-orange-400"
+},
+{
+  icon: Users,
+  title: "Inscription Smartphone",
+  description:
+  "Solution d'inscription instantanée via QR code pour simplifier la participation et enrichir votre base clients.",
+  features: ["QR code dynamique", "Inscription en 30s", "RGPD compliant"],
+  gradient: "from-emerald-500 to-teal-400"
+},
+{
+  icon: Trophy,
+  title: "Jeux en Présentiel",
+  description:
+  "Animations événementielles gamifiées pour créer des moments mémorables dans vos points de vente.",
+  features: ["Bornes interactives", "Animations live", "Lots & cadeaux"],
+  gradient: "from-purple-500 to-pink-400"
+}];
+
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-    },
-  },
+      staggerChildren: 0.15
+    }
+  }
 };
 
 const cardVariants = {
@@ -53,9 +53,9 @@ const cardVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
-    },
-  },
+      duration: 0.6
+    }
+  }
 };
 
 export const ServicesSection = () => {
@@ -71,8 +71,8 @@ export const ServicesSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+          className="text-center mb-16">
+
           <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
             Nos <span className="gradient-text">solutions</span> clé en main
           </h2>
@@ -88,32 +88,32 @@ export const ServicesSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 gap-6"
-        >
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              variants={cardVariants}
-              className={`group glass-card rounded-3xl p-8 card-hover cursor-pointer relative overflow-hidden ${service.compact ? 'py-5' : ''}`}
-            >
+          className="grid md:grid-cols-2 gap-6">
+
+          {services.map((service, index) =>
+          <motion.div
+            key={index}
+            variants={cardVariants}
+            className={`group glass-card rounded-3xl p-8 card-hover cursor-pointer relative overflow-hidden ${service.compact ? 'py-5' : ''}`}>
+
               {/* Gradient overlay on hover */}
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
-              />
+              <div className="" />
+
+
 
               <div className="relative z-10">
                 {/* Icon */}
                 <div
-                  className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center ${service.compact ? 'mb-3' : 'mb-6'}`}
-                >
-                  {service.compact ? (
-                    <div className="relative w-7 h-7">
+                className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center ${service.compact ? 'mb-3' : 'mb-6'}`}>
+
+                  {service.compact ?
+                <div className="relative w-7 h-7">
                       <Monitor className="w-7 h-7 text-white absolute inset-0" />
                       <QrCode className="w-3 h-3 text-white absolute top-[5px] left-1/2 -translate-x-1/2" />
-                    </div>
-                  ) : (
-                    <service.icon className="w-7 h-7 text-white" />
-                  )}
+                    </div> :
+
+                <service.icon className="w-7 h-7 text-white" />
+                }
                 </div>
 
                 {/* Title */}
@@ -125,30 +125,30 @@ export const ServicesSection = () => {
                 </div>
 
                 {/* Description */}
-                {service.description && (
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                {service.description &&
+              <p className="text-muted-foreground mb-6 leading-relaxed">
                     {service.description}
                   </p>
-                )}
+              }
 
                 {/* Features */}
-                {service.features.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
-                    {service.features.map((feature, featureIndex) => (
-                      <span
-                        key={featureIndex}
-                        className="px-3 py-1 rounded-full text-sm font-medium bg-secondary/50 text-muted-foreground"
-                      >
+                {service.features.length > 0 &&
+              <div className="flex flex-wrap gap-2">
+                    {service.features.map((feature, featureIndex) =>
+                <span
+                  key={featureIndex}
+                  className="px-3 py-1 rounded-full text-sm font-medium bg-secondary/50 text-muted-foreground">
+
                         {feature}
                       </span>
-                    ))}
-                  </div>
                 )}
+                  </div>
+              }
               </div>
             </motion.div>
-          ))}
+          )}
         </motion.div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
