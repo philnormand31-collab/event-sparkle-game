@@ -22,11 +22,12 @@ const services = [
 },
 {
   icon: Users,
-  title: "Inscription Smartphone",
-  description:
-  "Solution d'inscription instantanée via QR code pour simplifier la participation et enrichir votre base clients.",
-  features: ["QR code dynamique", "Inscription en 30s", "RGPD compliant"],
-  gradient: "from-emerald-500 to-teal-400"
+  title: "Event MOBILPLAY",
+  titleRender: () => <>Event <span className="text-foreground">MOBIL</span><span className="text-accent">PLAY</span></>,
+  description: "",
+  features: [],
+  gradient: "from-emerald-500 to-teal-400",
+  compact: true
 },
 {
   icon: Trophy,
