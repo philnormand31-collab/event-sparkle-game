@@ -58,7 +58,7 @@ export const CTASection = () => {
 
           <div className="flex items-center justify-center">
             <Button variant="hero" size="xl" className="group" onClick={() => setBookingOpen(true)}>
-              Je réserve mon créneau
+              Une visio avec un pro
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>
