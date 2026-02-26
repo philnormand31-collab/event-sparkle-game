@@ -51,7 +51,7 @@ export const BookingDialog = ({ open, onOpenChange }: BookingDialogProps) => {
             Réservez votre visio
           </DialogTitle>
           <DialogDescription>
-            Choisissez une date et un créneau horaire pour votre démonstration personnalisée.
+            Choisissez une date et un créneau horaire pour rendez-vous pro
           </DialogDescription>
         </DialogHeader>
 
