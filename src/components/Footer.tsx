@@ -41,17 +41,17 @@ export const Footer = () => {
 
             </p>
             <div className="space-y-3">
-              <a href="mailto:contact@gameeventpro.fr" className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors">contact@ludigami.com
+              <a href="mailto:contact@ludigami.com" className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors">
                 <Mail className="w-4 h-4" />
-                contact@gameeventpro.fr
+                <span>contact@ludigami.com</span>
               </a>
-              <a href="tel:+33123456789" className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors">06 08 55 86 12
+              <a href="tel:+33608558612" className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors">
                 <Phone className="w-4 h-4" />
-                01 23 45 67 89
+                <span>06 08 55 86 12</span>
               </a>
-              <div className="flex items-center gap-3 text-muted-foreground">Toulouse, France
+              <div className="flex items-center gap-3 text-muted-foreground">
                 <MapPin className="w-4 h-4" />
-                Paris, France
+                <span>Toulouse, France</span>
               </div>
             </div>
           </div>
@@ -66,9 +66,8 @@ export const Footer = () => {
               <li key={link.name}>
                   <a
                   href={link.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors text-sm">PLAYCORNER
-
-                  {link.name}
+                  className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                    {link.name}
                   </a>
                 </li>
               )}
