@@ -45,7 +45,7 @@ export const CTASection = () => {
           </motion.div>
 
           <h2 className="font-display text-3xl md:text-5xl font-bold mb-6">
-            Prêt à <span className="gradient-text-accent">gamifier</span> votre
+            Prêt à <span className="gradient-text-accent">jouer</span> votre
             commerce ?
           </h2>
 
