@@ -9,7 +9,13 @@ const services = [
   description: "",
   features: [],
   gradient: "from-primary to-blue-400",
-  compact: true
+  compact: true,
+  iconRender: () => (
+    <div className="relative w-14 h-14 flex items-center justify-center">
+      <Monitor className="w-14 h-14 text-white absolute inset-0" />
+      <QrCode className="w-6 h-6 text-white relative -mt-1" />
+    </div>
+  )
 },
 {
   icon: Smartphone,
