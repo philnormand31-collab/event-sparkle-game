@@ -20,9 +20,9 @@ const services = [
   gradient: "from-accent to-orange-400",
   compact: true,
   iconRender: () => (
-    <div className="relative w-7 h-7">
-      <Monitor className="w-7 h-7 text-white absolute inset-0" />
-      <span className="text-white absolute top-[5px] left-1/2 -translate-x-1/2 text-[5px] font-bold tracking-tight">385274</span>
+    <div className="relative w-11 h-11">
+      <Monitor className="w-11 h-11 text-white absolute inset-0" />
+      <span className="text-white absolute top-[7px] left-1/2 -translate-x-1/2 text-[7px] font-bold tracking-tight">385274</span>
     </div>
   )
 },
@@ -115,11 +115,11 @@ export const ServicesSection = () => {
                   <div className="flex items-center gap-5">
                     {/* Large Icon */}
                     <div
-                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center shrink-0`}>
+                      className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center shrink-0`}>
                       {service.iconRender ? service.iconRender() :
-                        <div className="relative w-9 h-9">
-                          <Monitor className="w-9 h-9 text-white absolute inset-0" />
-                          <QrCode className="w-4 h-4 text-white absolute top-[6px] left-1/2 -translate-x-1/2" />
+                        <div className="relative w-11 h-11">
+                          <Monitor className="w-11 h-11 text-white absolute inset-0" />
+                          <QrCode className="w-5 h-5 text-white absolute top-[7px] left-1/2 -translate-x-1/2" />
                         </div>
                       }
                     </div>
