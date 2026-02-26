@@ -105,7 +105,7 @@ export const ServicesSection = () => {
             <span className="text-accent">LUDI</span><span className="text-foreground">GAMI</span> se plie en <span className="gradient-text">quatre</span> <br />pour la réussite de votre projet !
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Notre investissement est total dans la réussite de votre événement, découvrez nos propositions pour clarifier votre projet
+            Quelle est la solution la plus adaptée à votre projet ?
           </p>
         </motion.div>
 
