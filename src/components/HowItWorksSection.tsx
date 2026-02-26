@@ -28,7 +28,7 @@ const steps = [
   icon: BarChart3,
   title: "Analyse",
   description:
-  "Suivi en temps réel des performances et optimisation continue pour maximiser vos résultats."
+  "Suivi en temps réel et en continu de votre événement, intervention à distance sur votre programme si nécessaire, DATA en fin d'opération."
 }];
 
 
