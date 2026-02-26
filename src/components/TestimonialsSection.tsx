@@ -15,7 +15,7 @@ const testimonials = [
     role: "Gérant",
     company: "Sport Plus",
     content:
-      "Le programme de fidélité gamifié a transformé nos clients occasionnels en habitués. Notre taux de rétention a bondi de 40%.",
+      "Suivant la méthode choisie, les retours sont assez impressionnants en magasin, l'animation du WINGO a boostée notre fréquentation",
     rating: 5,
   },
   {
