@@ -4,7 +4,7 @@ import { TrendingUp, Users, Heart, Database, Shield, Zap } from "lucide-react";
 const benefits = [
   {
     icon: TrendingUp,
-    title: "+45% de trafic en magasin",
+    title: "Augmentation de trafic",
     description: "Attirez plus de visiteurs grâce à des campagnes ludiques et virales.",
   },
   {
