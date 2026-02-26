@@ -2,14 +2,23 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { BookingDialog } from "@/components/BookingDialog";
+import { BookingDialog, BookingInfo } from "@/components/BookingDialog";
+import { ContactDialog } from "@/components/ContactDialog";
 
 export const CTASection = () => {
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
+  const [bookingInfo, setBookingInfo] = useState<BookingInfo | null>(null);
+
+  const handleBookingConfirm = (info: BookingInfo) => {
+    setBookingInfo(info);
+    setContactOpen(true);
+  };
 
   return (
     <>
-    <BookingDialog open={bookingOpen} onOpenChange={setBookingOpen} />
+    <BookingDialog open={bookingOpen} onOpenChange={setBookingOpen} onConfirm={handleBookingConfirm} />
+    <ContactDialog open={contactOpen} onOpenChange={setContactOpen} bookingInfo={bookingInfo} />
     <section id="contact" className="section-padding relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-secondary/20 to-background" />

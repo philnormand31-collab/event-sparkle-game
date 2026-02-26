@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Send, CheckCircle } from "lucide-react";
+import type { BookingInfo } from "@/components/BookingDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,12 +17,13 @@ import { useToast } from "@/hooks/use-toast";
 interface ContactDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  bookingInfo?: BookingInfo | null;
 }
 
 const CONTACT_EMAIL = "phil.normand31@gmail.com";
 const MAX_MESSAGE_LENGTH = 300;
 
-export const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
+export const ContactDialog = ({ open, onOpenChange, bookingInfo }: ContactDialogProps) => {
   const { toast } = useToast();
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({
@@ -33,6 +35,15 @@ export const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
     email: "",
     message: "",
   });
+
+  useEffect(() => {
+    if (open && bookingInfo) {
+      setForm((prev) => ({
+        ...prev,
+        message: `Rendez-vous visio demandé le ${bookingInfo.date} à ${bookingInfo.time}.`,
+      }));
+    }
+  }, [open, bookingInfo]);
 
   const handleChange = (field: string, value: string) => {
     if (field === "message" && value.length > MAX_MESSAGE_LENGTH) return;
