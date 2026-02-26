@@ -57,8 +57,7 @@ export const BenefitsSection = () => {
             Pourquoi <span className="gradient-text">nous choisir</span> ?
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Des résultats concrets pour votre commerce, soutenus par notre expertise
-            et notre technologie.
+            Des résultats concrets pour votre établissement, soutenus par notre expertise, nos process et notre technologie.
           </p>
         </motion.div>
 
