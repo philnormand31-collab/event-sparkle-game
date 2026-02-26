@@ -20,9 +20,9 @@ const services = [
   gradient: "from-accent to-orange-400",
   compact: true,
   iconRender: () => (
-    <div className="relative w-11 h-11">
-      <Monitor className="w-11 h-11 text-white absolute inset-0" />
-      <span className="text-white absolute top-[7px] left-1/2 -translate-x-1/2 text-[7px] font-bold tracking-tight">385274</span>
+    <div className="relative w-14 h-14">
+      <Monitor className="w-14 h-14 text-white absolute inset-0" />
+      <span className="text-white absolute top-[8px] left-1/2 -translate-x-1/2 text-[9px] font-bold tracking-tight">385274</span>
     </div>
   )
 },
