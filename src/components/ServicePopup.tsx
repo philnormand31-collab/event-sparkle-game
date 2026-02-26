@@ -1,26 +1,55 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Upload, ImageIcon } from "lucide-react";
+import { X, Upload, ImageIcon, Save, Loader2 } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { useServiceContent } from "@/hooks/useServiceContent";
+import { toast } from "sonner";
 
 interface ServicePopupProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   title: React.ReactNode;
   gradient: string;
+  serviceKey: string;
   iconRender?: () => React.ReactNode;
 }
 
-export const ServicePopup = ({ open, onOpenChange, title, gradient, iconRender }: ServicePopupProps) => {
-  const [image, setImage] = useState<string | null>(null);
+export const ServicePopup = ({ open, onOpenChange, title, gradient, serviceKey, iconRender }: ServicePopupProps) => {
+  const { isAdmin } = useAuth();
+  const { content, loading, saveContent } = useServiceContent(serviceKey);
   const [description, setDescription] = useState("");
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    if (content) {
+      setDescription(content.description || "");
+      setImagePreview(content.image_url || null);
+      setImageFile(null);
+    }
+  }, [content]);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setImageFile(file);
       const reader = new FileReader();
-      reader.onloadend = () => setImage(reader.result as string);
+      reader.onloadend = () => setImagePreview(reader.result as string);
       reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSave = async () => {
+    setSaving(true);
+    const { error } = await saveContent(description, imageFile || undefined);
+    setSaving(false);
+    if (error) {
+      toast.error("Erreur lors de la sauvegarde");
+    } else {
+      toast.success("Contenu sauvegardé !");
+      setImageFile(null);
     }
   };
 
@@ -65,9 +94,9 @@ export const ServicePopup = ({ open, onOpenChange, title, gradient, iconRender }
                 <h2 className="font-display text-2xl md:text-3xl font-bold">{title}</h2>
               </motion.div>
 
-              {/* Content: text left, image right */}
+              {/* Content */}
               <div className="flex flex-1 gap-6 px-8 pb-8 h-[calc(100%-90px)]">
-                {/* Left: Text area */}
+                {/* Left: Text */}
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -75,15 +104,27 @@ export const ServicePopup = ({ open, onOpenChange, title, gradient, iconRender }
                   className="flex-1 flex flex-col"
                 >
                   <label className="text-sm font-medium text-muted-foreground mb-2">Description</label>
-                  <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Décrivez votre événement ici..."
-                    className="flex-1 w-full rounded-2xl border border-border/50 bg-secondary/30 p-4 text-sm text-foreground placeholder:text-muted-foreground/60 resize-none focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
-                  />
+                  {isAdmin ? (
+                    <textarea
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      placeholder="Décrivez votre événement ici..."
+                      className="flex-1 w-full rounded-2xl border border-border/50 bg-secondary/30 p-4 text-sm text-foreground placeholder:text-muted-foreground/60 resize-none focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
+                    />
+                  ) : (
+                    <div className="flex-1 w-full rounded-2xl border border-border/50 bg-secondary/30 p-4 text-sm text-foreground overflow-auto">
+                      {loading ? (
+                        <span className="text-muted-foreground">Chargement...</span>
+                      ) : description ? (
+                        <p className="whitespace-pre-wrap">{description}</p>
+                      ) : (
+                        <span className="text-muted-foreground/60">Aucune description pour le moment.</span>
+                      )}
+                    </div>
+                  )}
                 </motion.div>
 
-                {/* Right: Image upload */}
+                {/* Right: Image */}
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -91,46 +132,68 @@ export const ServicePopup = ({ open, onOpenChange, title, gradient, iconRender }
                   className="flex-1 flex flex-col"
                 >
                   <label className="text-sm font-medium text-muted-foreground mb-2">Photo</label>
-                  <label
-                    className={`flex-1 rounded-2xl border-2 border-dashed cursor-pointer overflow-hidden transition-all group ${
-                      image
-                        ? "border-accent/30 hover:border-accent/60"
-                        : "border-border/50 hover:border-accent/50 bg-secondary/20"
-                    }`}
-                  >
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      className="hidden"
-                    />
-                    {image ? (
-                      <div className="relative w-full h-full">
-                        <img
-                          src={image}
-                          alt="Uploaded"
-                          className="w-full h-full object-cover rounded-2xl"
-                        />
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all rounded-2xl flex items-center justify-center">
-                          <Upload className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                  {isAdmin ? (
+                    <label
+                      className={`flex-1 rounded-2xl border-2 border-dashed cursor-pointer overflow-hidden transition-all group ${
+                        imagePreview
+                          ? "border-accent/30 hover:border-accent/60"
+                          : "border-border/50 hover:border-accent/50 bg-secondary/20"
+                      }`}
+                    >
+                      <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
+                      {imagePreview ? (
+                        <div className="relative w-full h-full">
+                          <img src={imagePreview} alt="Uploaded" className="w-full h-full object-cover rounded-2xl" />
+                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all rounded-2xl flex items-center justify-center">
+                            <Upload className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </div>
                         </div>
-                      </div>
-                    ) : (
-                      <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-muted-foreground/60 group-hover:text-accent/70 transition-colors">
-                        <motion.div
-                          animate={{ y: [0, -4, 0] }}
-                          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                        >
+                      ) : (
+                        <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-muted-foreground/60 group-hover:text-accent/70 transition-colors">
+                          <motion.div animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}>
+                            <ImageIcon className="w-12 h-12" />
+                          </motion.div>
+                          <span className="text-sm font-medium">Cliquez pour ajouter une photo</span>
+                        </div>
+                      )}
+                    </label>
+                  ) : (
+                    <div className="flex-1 rounded-2xl border border-border/50 bg-secondary/20 overflow-hidden flex items-center justify-center">
+                      {loading ? (
+                        <span className="text-muted-foreground text-sm">Chargement...</span>
+                      ) : imagePreview ? (
+                        <img src={imagePreview} alt="Service" className="w-full h-full object-cover rounded-2xl" />
+                      ) : (
+                        <div className="flex flex-col items-center gap-2 text-muted-foreground/40">
                           <ImageIcon className="w-12 h-12" />
-                        </motion.div>
-                        <span className="text-sm font-medium">Cliquez pour ajouter une photo</span>
-                      </div>
-                    )}
-                  </label>
+                          <span className="text-sm">Aucune photo</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </motion.div>
               </div>
 
-              {/* Decorative floating shapes */}
+              {/* Save button for admin */}
+              {isAdmin && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.35 }}
+                  className="absolute bottom-4 right-4 z-20"
+                >
+                  <button
+                    onClick={handleSave}
+                    disabled={saving}
+                    className={`px-5 py-2.5 rounded-xl bg-gradient-to-r ${gradient} text-white font-medium text-sm flex items-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50`}
+                  >
+                    {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                    {saving ? "Sauvegarde..." : "Sauvegarder"}
+                  </button>
+                </motion.div>
+              )}
+
+              {/* Decorative shapes */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
