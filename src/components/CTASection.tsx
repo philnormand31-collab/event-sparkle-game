@@ -53,7 +53,7 @@ export const CTASection = () => {
             Pas de blabla, ce que vous souhaitez, ce sont des résultats.
           </p>
           <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">
-            Une visio avec un spécialiste pour tout savoir, même le prix !
+            <span className="gradient-text-accent">Une visio avec un spécialiste</span> pour tout savoir, même le prix !
           </p>
 
           <div className="flex items-center justify-center">
