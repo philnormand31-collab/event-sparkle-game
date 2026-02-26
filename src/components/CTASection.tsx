@@ -58,7 +58,7 @@ export const CTASection = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button variant="hero" size="xl" className="group w-full sm:w-auto" onClick={() => setBookingOpen(true)}>
-              Réserver ma démo gratuite
+              Je réserve mon créneau
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
             <Button variant="glass" size="xl" className="w-full sm:w-auto">
