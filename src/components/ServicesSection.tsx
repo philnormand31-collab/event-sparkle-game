@@ -18,7 +18,13 @@ const services = [
   description: "",
   features: [],
   gradient: "from-accent to-orange-400",
-  compact: true
+  compact: true,
+  iconRender: () => (
+    <div className="relative w-7 h-7">
+      <Monitor className="w-7 h-7 text-white absolute inset-0" />
+      <span className="text-white absolute top-[5px] left-1/2 -translate-x-1/2 text-[5px] font-bold tracking-tight">385274</span>
+    </div>
+  )
 },
 {
   icon: Users,
@@ -109,7 +115,8 @@ export const ServicesSection = () => {
                 <div
                 className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center ${service.compact ? 'mb-3' : 'mb-6'}`}>
 
-                  {service.compact ?
+                  {service.iconRender ? service.iconRender() :
+                  service.compact ?
                 <div className="relative w-7 h-7">
                       <Monitor className="w-7 h-7 text-white absolute inset-0" />
                       <QrCode className="w-3 h-3 text-white absolute top-[5px] left-1/2 -translate-x-1/2" />
