@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { CalendarIcon, Clock } from "lucide-react";
@@ -18,19 +18,58 @@ const timeSlots = [
   "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00",
 ];
 
+const BOOKED_SLOTS_KEY = "ludigami_booked_slots";
+
+export interface BookingInfo {
+  date: string;
+  time: string;
+}
+
+function getBookedSlots(): Record<string, string[]> {
+  try {
+    return JSON.parse(localStorage.getItem(BOOKED_SLOTS_KEY) || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function addBookedSlot(dateKey: string, time: string) {
+  const slots = getBookedSlots();
+  if (!slots[dateKey]) slots[dateKey] = [];
+  if (!slots[dateKey].includes(time)) slots[dateKey].push(time);
+  localStorage.setItem(BOOKED_SLOTS_KEY, JSON.stringify(slots));
+}
+
 interface BookingDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onConfirm?: (info: BookingInfo) => void;
 }
 
-export const BookingDialog = ({ open, onOpenChange }: BookingDialogProps) => {
+export const BookingDialog = ({ open, onOpenChange, onConfirm }: BookingDialogProps) => {
   const [date, setDate] = useState<Date>();
   const [selectedTime, setSelectedTime] = useState<string>();
-  const [confirmed, setConfirmed] = useState(false);
+  const [bookedSlots, setBookedSlots] = useState<Record<string, string[]>>({});
+
+  useEffect(() => {
+    if (open) {
+      setBookedSlots(getBookedSlots());
+    }
+  }, [open]);
+
+  const selectedDateKey = date ? format(date, "yyyy-MM-dd") : "";
+  const takenSlots = selectedDateKey ? (bookedSlots[selectedDateKey] || []) : [];
 
   const handleConfirm = () => {
     if (date && selectedTime) {
-      setConfirmed(true);
+      const dateKey = format(date, "yyyy-MM-dd");
+      addBookedSlot(dateKey, selectedTime);
+      const info: BookingInfo = {
+        date: format(date, "d MMMM yyyy", { locale: fr }),
+        time: selectedTime,
+      };
+      handleClose();
+      onConfirm?.(info);
     }
   };
 
@@ -39,7 +78,6 @@ export const BookingDialog = ({ open, onOpenChange }: BookingDialogProps) => {
     setTimeout(() => {
       setDate(undefined);
       setSelectedTime(undefined);
-      setConfirmed(false);
     }, 300);
   };
 
@@ -55,85 +93,69 @@ export const BookingDialog = ({ open, onOpenChange }: BookingDialogProps) => {
           </DialogDescription>
         </DialogHeader>
 
-        {!confirmed ? (
-          <div className="space-y-6">
-            {/* Calendar */}
+        <div className="space-y-6">
+          {/* Calendar */}
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <CalendarIcon className="w-4 h-4 text-accent" />
+              <span className="text-sm font-medium">Choisir une date</span>
+            </div>
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={(d) => { setDate(d); setSelectedTime(undefined); }}
+              disabled={(d) => d < new Date() || d.getDay() === 0 || d.getDay() === 6}
+              className="rounded-xl border border-border pointer-events-auto"
+              locale={fr}
+            />
+          </div>
+
+          {/* Time slots */}
+          {date && (
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <CalendarIcon className="w-4 h-4 text-accent" />
-                <span className="text-sm font-medium">Choisir une date</span>
+                <Clock className="w-4 h-4 text-accent" />
+                <span className="text-sm font-medium">
+                  Créneaux disponibles — {format(date, "d MMMM yyyy", { locale: fr })}
+                </span>
               </div>
-              <Calendar
-                mode="single"
-                selected={date}
-                onSelect={setDate}
-                disabled={(d) => d < new Date() || d.getDay() === 0 || d.getDay() === 6}
-                className="rounded-xl border border-border pointer-events-auto"
-                locale={fr}
-              />
-            </div>
-
-            {/* Time slots */}
-            {date && (
-              <div>
-                <div className="flex items-center gap-2 mb-3">
-                  <Clock className="w-4 h-4 text-accent" />
-                  <span className="text-sm font-medium">
-                    Créneaux disponibles — {format(date, "d MMMM yyyy", { locale: fr })}
-                  </span>
-                </div>
-                <div className="grid grid-cols-4 gap-2">
-                  {timeSlots.map((time) => (
+              <div className="grid grid-cols-4 gap-2">
+                {timeSlots.map((time) => {
+                  const isTaken = takenSlots.includes(time);
+                  return (
                     <button
                       key={time}
-                      onClick={() => setSelectedTime(time)}
+                      onClick={() => !isTaken && setSelectedTime(time)}
+                      disabled={isTaken}
                       className={cn(
                         "px-3 py-2 rounded-lg text-sm font-medium transition-all border",
-                        selectedTime === time
-                          ? "bg-accent text-accent-foreground border-accent"
-                          : "bg-secondary/50 text-foreground border-border hover:border-accent/50"
+                        isTaken
+                          ? "bg-muted text-muted-foreground border-border opacity-50 cursor-not-allowed line-through"
+                          : selectedTime === time
+                            ? "bg-accent text-accent-foreground border-accent"
+                            : "bg-secondary/50 text-foreground border-border hover:border-accent/50"
                       )}
                     >
                       {time}
                     </button>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
-            )}
-
-            {/* Confirm button */}
-            {date && selectedTime && (
-              <Button
-                variant="hero"
-                size="lg"
-                className="w-full"
-                onClick={handleConfirm}
-              >
-                Confirmer le {format(date, "d MMMM", { locale: fr })} à {selectedTime}
-              </Button>
-            )}
-          </div>
-        ) : (
-          <div className="text-center py-8 space-y-4">
-            <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mx-auto">
-              <CalendarIcon className="w-8 h-8 text-accent" />
             </div>
-            <h3 className="font-display text-lg font-semibold">Rendez-vous confirmé !</h3>
-            <p className="text-muted-foreground">
-              Votre démo est prévue le{" "}
-              <span className="text-foreground font-medium">
-                {date && format(date, "d MMMM yyyy", { locale: fr })}
-              </span>{" "}
-              à <span className="text-foreground font-medium">{selectedTime}</span>.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Un email de confirmation vous sera envoyé sous peu.
-            </p>
-            <Button variant="glass" onClick={handleClose} className="mt-4">
-              Fermer
+          )}
+
+          {/* Confirm button */}
+          {date && selectedTime && (
+            <Button
+              variant="hero"
+              size="lg"
+              className="w-full"
+              onClick={handleConfirm}
+            >
+              Confirmer le {format(date, "d MMMM", { locale: fr })} à {selectedTime}
             </Button>
-          </div>
-        )}
+          )}
+        </div>
       </DialogContent>
     </Dialog>
   );
