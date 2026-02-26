@@ -45,7 +45,7 @@ export const TestimonialsSection = () => {
           <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
             C'est toujours nos <span className="gradient-text-accent">clients</span> qui en parlent le mieux
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg whitespace-nowrap">
             Découvrez quelques retours d'expérience de clients réguliers qui nous font confiance...
           </p>
         </motion.div>
