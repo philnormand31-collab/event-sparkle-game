@@ -102,7 +102,7 @@ export const ServicesSection = () => {
           className="text-center mb-16">
 
           <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-            <span className="text-accent">LUDI</span><span className="text-foreground">GAMI</span> se plie en <span className="gradient-text">quatre</span> !
+            <span className="text-accent">LUDI</span><span className="text-foreground">GAMI</span> se plie en <span className="gradient-text">quatre</span> pour la réussite de votre projet !
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Notre investissement est total dans la réussite de votre événement, découvrez nos propositions pour clarifier votre projet
