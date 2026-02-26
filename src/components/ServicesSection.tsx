@@ -22,7 +22,7 @@ const services = [
   iconRender: () => (
     <div className="relative w-14 h-14">
       <Monitor className="w-14 h-14 text-white absolute inset-0" />
-      <span className="text-white absolute top-[8px] left-1/2 -translate-x-1/2 text-[9px] font-bold tracking-tight">385274</span>
+      <span className="text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[30%] text-[11px] font-bold tracking-tight">385274</span>
     </div>
   )
 },
