@@ -2,35 +2,35 @@ import { motion } from "framer-motion";
 import { MessageSquare, Palette, Rocket, BarChart3 } from "lucide-react";
 
 const steps = [
-  {
-    number: "01",
-    icon: MessageSquare,
-    title: "Consultation",
-    description:
-      "Nous analysons vos objectifs, votre cible et vos contraintes pour concevoir une solution adaptée.",
-  },
-  {
-    number: "02",
-    icon: Palette,
-    title: "Conception",
-    description:
-      "Notre équipe créative développe les mécaniques de jeu et le design personnalisé à votre marque.",
-  },
-  {
-    number: "03",
-    icon: Rocket,
-    title: "Déploiement",
-    description:
-      "Installation, formation de vos équipes et lancement de l'opération dans vos points de vente.",
-  },
-  {
-    number: "04",
-    icon: BarChart3,
-    title: "Analyse",
-    description:
-      "Suivi en temps réel des performances et optimisation continue pour maximiser vos résultats.",
-  },
-];
+{
+  number: "01",
+  icon: MessageSquare,
+  title: "Consultation",
+  description:
+  "Nous analysons vos objectifs, votre cible et vos contraintes pour concevoir une solution adaptée."
+},
+{
+  number: "02",
+  icon: Palette,
+  title: "Conception",
+  description:
+  "Notre équipe créative développe les mécaniques de jeu et le design personnalisé à votre marque."
+},
+{
+  number: "03",
+  icon: Rocket,
+  title: "Déploiement",
+  description:
+  "Installation, formation de vos équipes et lancement de l'opération dans vos points de vente."
+},
+{
+  number: "04",
+  icon: BarChart3,
+  title: "Analyse",
+  description:
+  "Suivi en temps réel des performances et optimisation continue pour maximiser vos résultats."
+}];
+
 
 export const HowItWorksSection = () => {
   return (
@@ -44,13 +44,14 @@ export const HowItWorksSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
+          className="text-center mb-20">
+
           <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
             Comment ça <span className="gradient-text-accent">marche</span> ?
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Un processus simple, rapide et efficace pour lancer votre événement digital en présentiel en quelques jours !
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Un processus simple, rapide et efficace pour lancer votre événement digital en quelques jours seulement dans votre établissement !
+
+
           </p>
         </motion.div>
 
@@ -60,15 +61,15 @@ export const HowItWorksSection = () => {
           <div className="hidden lg:block absolute top-24 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-primary via-accent to-primary opacity-20" />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {steps.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                className="relative text-center"
-              >
+            {steps.map((step, index) =>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              className="relative text-center">
+
                 {/* Number Badge */}
                 <div className="relative inline-flex mb-6">
                   <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-secondary to-card flex items-center justify-center border border-border/50 relative z-10">
@@ -87,10 +88,10 @@ export const HowItWorksSection = () => {
                   {step.description}
                 </p>
               </motion.div>
-            ))}
+            )}
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
