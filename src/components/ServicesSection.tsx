@@ -13,11 +13,12 @@ const services = [
 },
 {
   icon: Smartphone,
-  title: "Jeux Digitaux",
-  description:
-  "Des jeux mobiles personnalisés à votre marque pour captiver votre audience et collecter des données précieuses.",
-  features: ["Roue de la fortune", "Quiz interactifs", "Scratch cards"],
-  gradient: "from-accent to-orange-400"
+  title: "Event NUMERICODE",
+  titleRender: () => <>Event <span className="text-foreground">NUMERI</span><span className="text-accent">CODE</span></>,
+  description: "",
+  features: [],
+  gradient: "from-accent to-orange-400",
+  compact: true
 },
 {
   icon: Users,
