@@ -7,7 +7,7 @@ const testimonials = [
     role: "Directrice Marketing",
     company: "Boulangerie Les Délices",
     content:
-      "Grâce à GameEventPro, nous avons augmenté notre trafic de 60% pendant notre opération de Noël. Les clients adorent la roue de la fortune !",
+      "Je fais appel à Philippe et son équipe chaque année pour des opérations ponctuelles et thématiques en galerie comme le BLACK FRIDAY ou la fête des mères, les clients aiment jouer !",
     rating: 5,
   },
   {
