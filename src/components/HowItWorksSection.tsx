@@ -21,7 +21,7 @@ const steps = [
   icon: Rocket,
   title: "Déploiement",
   description:
-  "Installation, formation de vos équipes et lancement de l'opération dans vos points de vente."
+  "Préparation et envoi des éléments matériels sur site, aide à la mise en route si nécessaire, lancement de l'opération dans votre point de vente !"
 },
 {
   number: "04",
