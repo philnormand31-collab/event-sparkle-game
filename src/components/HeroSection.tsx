@@ -95,8 +95,8 @@ export const HeroSection = () => {
             Une visio avec un pro ?
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Button>
-          <Button variant="glass" size="xl">
-            Découvrir nos solutions
+          <Button variant="glass" size="xl" onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}>
+            Découvrez nos solutions
           </Button>
         </motion.div>
 
