@@ -39,7 +39,17 @@ const services = [
   description: "",
   features: [],
   gradient: "from-emerald-500 to-teal-400",
-  compact: true
+  compact: true,
+  iconRender: () => (
+    <div className="relative w-14 h-14 flex items-center justify-center">
+      <Monitor className="w-14 h-14 text-white absolute inset-0" />
+      <QrCode className="w-6 h-6 text-white relative -mt-1" />
+      <div className="absolute -bottom-[2px] left-1/2 -translate-x-1/2 flex gap-[6px]">
+        <span className="w-[6px] h-[6px] rounded-full border-2 border-white/90" />
+        <span className="w-[6px] h-[6px] rounded-full border-2 border-white/90" />
+      </div>
+    </div>
+  )
 },
 {
   icon: Trophy,
