@@ -2,7 +2,7 @@ import { MonitorSmartphone, Mail, Phone, MapPin, Linkedin, Twitter, Instagram } 
 
 const footerLinks = {
   services: [
-  { name: "Programme de Gamification", href: "#" },
+  { name: "Event LIVECODE", href: "#" },
   { name: "Jeux Digitaux", href: "#" },
   { name: "Inscription Smartphone", href: "#" },
   { name: "Jeux en Présentiel", href: "#" }],
