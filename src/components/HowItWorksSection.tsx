@@ -14,7 +14,7 @@ const steps = [
   icon: Palette,
   title: "Conception",
   description:
-  "Notre équipe créative développe les mécaniques de jeu et le design personnalisé à votre marque."
+  "Nous construisons votre jeu personnalisé, design et programmation, en studio grâce à notre plateforme dédiée..."
 },
 {
   number: "03",
