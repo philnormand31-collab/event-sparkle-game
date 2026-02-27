@@ -12,13 +12,23 @@ export const useServiceContent = (serviceKey: string) => {
   const [loading, setLoading] = useState(true);
 
   const fetchContent = async () => {
-    const { data } = await supabase
-      .from("service_content")
-      .select("service_key, description, image_url")
-      .eq("service_key", serviceKey)
-      .maybeSingle();
-    if (data) setContent(data as ServiceContent);
-    setLoading(false);
+    try {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from("service_content")
+        .select("service_key, description, image_url")
+        .eq("service_key", serviceKey)
+        .maybeSingle();
+      if (error) {
+        console.error("Error fetching service content:", error);
+      } else if (data) {
+        setContent(data as ServiceContent);
+      }
+    } catch (err) {
+      console.error("Unexpected error fetching service content:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
