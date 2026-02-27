@@ -10,7 +10,7 @@ const benefits = [
   {
     icon: Users,
     title: "Fidélisation renforcée",
-    description: "Créez une relation durable avec vos clients via des récompenses engageantes ponctuellement, sans rien changer à votre système de fidélisation actuel...",
+    description: "Créez une relation durable avec vos clients fidèles et augmentez le taux de conversion via des récompenses engageantes...",
   },
   {
     icon: Heart,
