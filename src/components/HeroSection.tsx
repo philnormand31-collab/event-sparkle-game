@@ -117,7 +117,7 @@ export const HeroSection = () => {
           className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
 
           {[
-          { value: "500+", label: "Personnalisable" },
+          { value: "100%", label: "Personnalisable" },
           { value: "2M+", label: "Participants" },
           { value: "+45%", label: "Engagement client" },
           { value: "98%", label: "Satisfaction" }].
