@@ -19,7 +19,7 @@ const benefits = [
   },
   {
     icon: Database,
-    title: "Chiffre d'affaires additionnel",
+    title: "Augmentation du panier moyen",
     description: "Appliquez nos méthodes pour augmenter le temps passé et les fréquences de visites de vos clients, un jeu sur options d'achats dès le premier Euros gagné....",
   },
   {
