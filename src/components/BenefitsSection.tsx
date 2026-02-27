@@ -9,7 +9,7 @@ const benefits = [
   },
   {
     icon: Users,
-    title: "Fidélisation renforcée, taux de convertion",
+    title: "Fidélisation renforcée et conversion",
     description: "Créez une relation durable avec vos clients fidèles et augmentez le taux de conversion via des récompenses engageantes...",
   },
   {
