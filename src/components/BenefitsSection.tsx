@@ -20,7 +20,7 @@ const benefits = [
   {
     icon: Database,
     title: "Chiffre d'affaires additionnel",
-    description: "Collectez des données qualifiées pour personnaliser vos communications.",
+    description: "Appliquez nos méthodes pour augmenter le temps passé et les fréquences de visites de vos clients, un jeu sur options d'achats dès le premier Euros gagné....",
   },
   {
     icon: Shield,
