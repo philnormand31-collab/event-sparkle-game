@@ -5,7 +5,7 @@ const benefits = [
   {
     icon: TrendingUp,
     title: "Augmentation de trafic",
-    description: "Attirez plus de clients en communiquant l'événement, les gains possibles, une pré-inscription en distanciel, un jeu accessible uniquement en présentiel...",
+    description: "Attirez plus de clients en communiquant sur la curiosité, la surprise, les gains possibles, une pré-inscription en distanciel, une expérience à vivre uniquement en présentiel...",
   },
   {
     icon: Users,
