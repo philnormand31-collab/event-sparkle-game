@@ -5,7 +5,7 @@ const benefits = [
   {
     icon: TrendingUp,
     title: "Augmentation de trafic",
-    description: "Attirez plus de clients, augmentez leur temps de présence et leurs fréquences de visites, appliquez nos méthodes et augmentez le panier moyen.",
+    description: "Attirez plus de clients en communiquant l'événement, les gains possibles, une pré-inscription en distanciel, un jeu en présentiel uniquement...",
   },
   {
     icon: Users,
