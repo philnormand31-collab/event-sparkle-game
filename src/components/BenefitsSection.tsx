@@ -24,7 +24,7 @@ const benefits = [
   },
   {
     icon: Shield,
-    title: "100% RGPD compliant",
+    title: "Sécurisation des gains remportés / 100% RGPD compliant",
     description: "Toutes nos solutions respectent les normes de protection des données en vigueur en conformité avec la CNIL",
   },
   {
