@@ -119,7 +119,7 @@ export const HeroSection = () => {
           {[
           { value: "100%", label: "Personnalisable" },
           { value: "100%", label: "Interactif" },
-          { value: "+45%", label: "Engagement client" },
+          { value: "100%", label: "Engagement client" },
           { value: "98%", label: "Satisfaction" }].
           map((stat, index) =>
           <div key={index} className="text-center">
