@@ -15,7 +15,7 @@ const benefits = [
   {
     icon: Heart,
     title: "Expérience client mémorable",
-    description: "Démarquez-vous avec des animations uniques qui marquent les esprits.",
+    description: "Démarquez vous avec des animations uniques qui marquent les esprits, transformez les smartphones de vos clients en télécommandes, impliquez vos clients en proposant des choix, en suggérant des réponses...",
   },
   {
     icon: Database,
