@@ -30,7 +30,7 @@ const benefits = [
   {
     icon: Zap,
     title: "Déploiement rapide",
-    description: "De l'idée au lancement de 5 à 10 jours selon la complexité du projet.",
+    description: "De l'idée au lancement de 5 à 10 jours selon la complexité du projet, un suivi pas à pas de la mise en place et du bon déroulement de votre événement, veille opérationnelle et intervention réseau...",
   },
 ];
 
