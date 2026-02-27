@@ -2,10 +2,10 @@ import { MonitorSmartphone, Mail, Phone, MapPin, Linkedin, Facebook, Instagram }
 
 const footerLinks = {
   services: [
-  { name: "Event LIVECODE", href: "#" },
-  { name: "Event NUMERICODE", href: "#" },
-  { name: "Event MOBILPLAY", href: "#" },
-  { name: "Event PLAYCORNER", href: "#" }],
+  { name: "Event LIVECODE", href: "#services" },
+  { name: "Event NUMERICODE", href: "#services" },
+  { name: "Event MOBILPLAY", href: "#services" },
+  { name: "Event PLAYCORNER", href: "#services" }],
 
   company: [
   { name: "À propos", href: "#" },
