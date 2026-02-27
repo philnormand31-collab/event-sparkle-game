@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, MonitorSmartphone } from "lucide-react";
+import { Menu, X, MonitorSmartphone, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ContactDialog } from "@/components/ContactDialog";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const navLinks = [
 { name: "Services", href: "#services" },
@@ -14,6 +17,12 @@ const navLinks = [
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
+  const { user, isAdmin } = useAuth();
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    toast.success("Déconnecté !");
+  };
 
   return (
     <>
@@ -56,10 +65,16 @@ export const Navbar = () => {
           </div>
 
           {/* CTA Button */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-3">
             <Button variant="hero" size="lg" onClick={() => setBookingOpen(true)}>
               En savoir plus
             </Button>
+            {user && (
+              <Button variant="ghost" size="sm" onClick={handleLogout} className="text-muted-foreground hover:text-destructive">
+                <LogOut className="w-4 h-4 mr-1" />
+                Déconnexion
+              </Button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -101,6 +116,12 @@ export const Navbar = () => {
                 <Button variant="hero" size="lg" className="mt-4 w-full" onClick={() => { setBookingOpen(true); setIsOpen(false); }}>
                   Demander une démo
                 </Button>
+                {user && (
+                  <Button variant="ghost" size="sm" className="mt-2 w-full text-muted-foreground hover:text-destructive" onClick={() => { handleLogout(); setIsOpen(false); }}>
+                    <LogOut className="w-4 h-4 mr-1" />
+                    Déconnexion
+                  </Button>
+                )}
               </div>
             </motion.div>
           }
