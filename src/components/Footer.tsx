@@ -2,10 +2,10 @@ import { MonitorSmartphone, Mail, Phone, MapPin, Linkedin, Facebook, Instagram }
 
 const footerLinks = {
   services: [
-  { name: "Event LIVECODE", href: "#services" },
-  { name: "Event NUMERICODE", href: "#services" },
-  { name: "Event MOBILPLAY", href: "#services" },
-  { name: "Event PLAYCORNER", href: "#services" }],
+  { name: "Event LIVECODE", href: "#services", serviceIndex: 0 },
+  { name: "Event NUMERICODE", href: "#services", serviceIndex: 1 },
+  { name: "Event MOBILPLAY", href: "#services", serviceIndex: 2 },
+  { name: "Event PLAYCORNER", href: "#services", serviceIndex: 3 }],
 
   company: [
   { name: "À propos", href: "#" },
@@ -64,11 +64,16 @@ export const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.services.map((link) =>
               <li key={link.name}>
-                  <a
-                  href={link.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                  <button
+                  onClick={() => {
+                    document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+                    setTimeout(() => {
+                      window.dispatchEvent(new CustomEvent('open-service', { detail: link.serviceIndex }));
+                    }, 500);
+                  }}
+                  className="text-muted-foreground hover:text-foreground transition-colors text-sm text-left">
                     {link.name}
-                  </a>
+                  </button>
                 </li>
               )}
             </ul>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Smartphone, Users, Trophy, QrCode, ArrowUpRight, Monitor, TabletSmartphone } from "lucide-react";
 import { ServicePopup } from "./ServicePopup";
@@ -94,6 +94,15 @@ const cardVariants = {
 
 export const ServicesSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const index = (e as CustomEvent).detail;
+      setOpenIndex(index);
+    };
+    window.addEventListener('open-service', handler);
+    return () => window.removeEventListener('open-service', handler);
+  }, []);
 
   return (
     <>
