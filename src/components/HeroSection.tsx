@@ -120,7 +120,7 @@ export const HeroSection = () => {
           { value: "100%", label: "Personnalisable" },
           { value: "100%", label: "Interactif" },
           { value: "100%", label: "Connecté" },
-          { value: "100%", label: "Satisfaction" }].
+          { value: "100%", label: "Attractif" }].
           map((stat, index) =>
           <div key={index} className="text-center">
               <div className="font-display text-3xl md:text-4xl font-bold gradient-text-accent">
