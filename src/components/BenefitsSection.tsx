@@ -25,7 +25,7 @@ const benefits = [
   {
     icon: Shield,
     title: "100% RGPD compliant",
-    description: "Toutes nos solutions respectent les normes de protection des données en vigueur en conformité avec la CNIL, de la confidentialité par cryptage à la confidentialité individuelle en passant par le temps de conservation de ces données jusqu'à la demande de suppression individuelle....",
+    description: "Toutes nos solutions respectent les normes de protection des données en vigueur en conformité avec la CNIL",
   },
   {
     icon: Zap,
