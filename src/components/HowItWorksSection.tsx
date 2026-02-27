@@ -7,7 +7,7 @@ const steps = [
   icon: MessageSquare,
   title: "Consultation",
   description:
-  "Nous discutons de votre projet en visio pour déterminer vos objectifs, vos contraintes et trouvons ensemble l'événement le plus adapté à votre établissement."
+  "Nous discutons de votre projet en visio pour déterminer vos objectifs, vos contraintes et trouvons ensemble la solution la mieux adaptée."
 },
 {
   number: "02",
