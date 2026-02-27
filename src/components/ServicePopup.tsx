@@ -17,7 +17,7 @@ interface ServicePopupProps {
 
 export const ServicePopup = ({ open, onOpenChange, title, gradient, serviceKey, iconRender }: ServicePopupProps) => {
   const { isAdmin } = useAuth();
-  const { content, loading, saveContent } = useServiceContent(serviceKey);
+  const { content, loading, error, saveContent, refetch } = useServiceContent(serviceKey);
   const [description, setDescription] = useState("");
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -30,6 +30,12 @@ export const ServicePopup = ({ open, onOpenChange, title, gradient, serviceKey, 
       setImageFile(null);
     }
   }, [content]);
+
+  useEffect(() => {
+    if (open) {
+      void refetch();
+    }
+  }, [open, refetch]);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -115,6 +121,8 @@ export const ServicePopup = ({ open, onOpenChange, title, gradient, serviceKey, 
                     <div className="flex-1 w-full rounded-2xl border border-border/50 bg-secondary/30 p-4 text-sm text-foreground overflow-auto">
                       {loading ? (
                         <span className="text-muted-foreground">Chargement...</span>
+                      ) : error ? (
+                        <span className="text-destructive">{error}</span>
                       ) : description ? (
                         <p className="whitespace-pre-wrap">{description}</p>
                       ) : (
@@ -161,6 +169,8 @@ export const ServicePopup = ({ open, onOpenChange, title, gradient, serviceKey, 
                     <div className="flex-1 rounded-2xl border border-border/50 bg-secondary/20 overflow-hidden flex items-center justify-center">
                       {loading ? (
                         <span className="text-muted-foreground text-sm">Chargement...</span>
+                      ) : error ? (
+                        <span className="text-destructive text-sm px-4 text-center">{error}</span>
                       ) : imagePreview ? (
                         <img src={imagePreview} alt="Service" className="w-full h-full object-cover rounded-2xl" />
                       ) : (
