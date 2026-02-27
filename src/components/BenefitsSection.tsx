@@ -14,7 +14,7 @@ const benefits = [
   },
   {
     icon: Heart,
-    title: "Expérience mémorable",
+    title: "Expérience client mémorable",
     description: "Démarquez-vous avec des animations uniques qui marquent les esprits.",
   },
   {
