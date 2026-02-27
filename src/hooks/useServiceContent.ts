@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 export interface ServiceContent {
@@ -10,30 +10,48 @@ export interface ServiceContent {
 export const useServiceContent = (serviceKey: string) => {
   const [content, setContent] = useState<ServiceContent | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const fetchContent = async () => {
+  const fetchContent = useCallback(async () => {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+
     try {
       setLoading(true);
+      setError(null);
+
       const { data, error } = await supabase
         .from("service_content")
         .select("service_key, description, image_url")
         .eq("service_key", serviceKey)
+        .abortSignal(controller.signal)
         .maybeSingle();
+
       if (error) {
         console.error("Error fetching service content:", error);
-      } else if (data) {
-        setContent(data as ServiceContent);
+        setError("Impossible de charger le contenu pour le moment.");
+        setContent(null);
+      } else {
+        setContent(data ? (data as ServiceContent) : null);
       }
     } catch (err) {
-      console.error("Unexpected error fetching service content:", err);
+      if (err instanceof DOMException && err.name === "AbortError") {
+        console.error("Service content fetch timed out");
+        setError("Le chargement a pris trop de temps.");
+      } else {
+        console.error("Unexpected error fetching service content:", err);
+        setError("Impossible de charger le contenu pour le moment.");
+      }
+      setContent(null);
     } finally {
+      clearTimeout(timeoutId);
       setLoading(false);
     }
-  };
+  }, [serviceKey]);
 
   useEffect(() => {
-    fetchContent();
-  }, [serviceKey]);
+    void fetchContent();
+  }, [fetchContent]);
 
   const saveContent = async (description: string, imageFile?: File) => {
     let image_url = content?.image_url || "";
@@ -59,9 +77,10 @@ export const useServiceContent = (serviceKey: string) => {
 
     if (!error) {
       setContent({ service_key: serviceKey, description, image_url });
+      setError(null);
     }
     return { error };
   };
 
-  return { content, loading, saveContent, refetch: fetchContent };
+  return { content, loading, error, saveContent, refetch: fetchContent };
 };
