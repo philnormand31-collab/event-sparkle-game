@@ -19,7 +19,7 @@ const benefits = [
   },
   {
     icon: Database,
-    title: "Data clients enrichie",
+    title: "Chiffre d'affaires additionnel",
     description: "Collectez des données qualifiées pour personnaliser vos communications.",
   },
   {
