@@ -24,7 +24,7 @@ const benefits = [
   },
   {
     icon: Shield,
-    title: "Sécurisation des gains remportés / Système 100% RGPD compliant",
+    title: "Sécurisation des gains / Système 100% RGPD compliant",
     description: "Envoi d'un e-mail automatique pour les gagnants, lien vers coupon virtuel avec QRCODE de contrôle (process anti-fraude). Toutes nos solutions respectent les normes de protection des données en vigueur en conformité avec la CNIL",
   },
   {
