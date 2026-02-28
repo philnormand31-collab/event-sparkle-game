@@ -15,7 +15,7 @@ const testimonials = [
     role: "Gérant",
     company: "Sport Plus",
     content:
-      "Suivant la méthode choisie, les retours sont assez impressionnants en magasin, l'animation du WINGO a boostée notre fréquentation",
+      "Nous avons organisé un jeu WINGO pour l'un de nos partenaire qui a vraiment apprécié la méthode, avec un code à saisir pour créer des lignes de WINGO, les clients sont revenus 3x plus en magasin sur la période",
     rating: 5,
   },
   {
