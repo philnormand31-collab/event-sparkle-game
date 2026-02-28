@@ -11,7 +11,7 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: "Thomas Martin",
+    name: "Olivier GROUX",
     role: "Gérant",
     company: "Sport Plus",
     content:
