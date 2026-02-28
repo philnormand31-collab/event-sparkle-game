@@ -5,7 +5,7 @@ const testimonials = [
   {
     name: "Emma THIRION",
     role: "Directrice Marketing",
-    company: "Boulangerie Les Délices",
+    company: "IRIS PROCREA",
     content:
       "J'organise régulièrement des événements comme le BLACK FRIDAY ou la Fête des mères avec LUDIGAMI, c'est toujours un succès auprès de nos clients !",
     rating: 5,
