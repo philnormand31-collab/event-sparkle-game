@@ -7,7 +7,7 @@ const testimonials = [
     role: "Directrice Marketing",
     company: "IRIS PROCREA",
     content:
-      "J'organise régulièrement des événements comme le BLACK FRIDAY ou la Fête des mères avec LUDIGAMI, c'est toujours un succès auprès de nos clients !",
+      "J'organise régulièrement des événements comme le BLACK FRIDAY ou la Fête des mères avec LUDIGAMI en mode stand PLAYCORNER, c'est toujours un succès auprès de nos clients !",
     rating: 5,
   },
   {
