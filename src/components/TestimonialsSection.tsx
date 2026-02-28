@@ -7,7 +7,7 @@ const testimonials = [
     role: "Directrice Marketing",
     company: "Boulangerie Les Délices",
     content:
-      "J'organise régulièrement des événements interactifs avec LUDIGAMI sur des thèmes forts comme le BLACK FRIDAY, le jeu en live sur écran déclenché par le smartphone, pas de coupons de jeu à gérer, un jeu autonome, un contrôle des gains et des DATA, rien ne manque !",
+      "J'organise régulièrement des événements comme le BLACK FRIDAY ou la Fête des mères avec LUDIGAMI, c'est toujours un succès auprès de nos clients !",
     rating: 5,
   },
   {
