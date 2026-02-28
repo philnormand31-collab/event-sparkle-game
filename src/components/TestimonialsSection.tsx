@@ -23,7 +23,7 @@ const testimonials = [
     role: "Responsable communication, animations",
     company: "Centre Commercial TEMPO",
     content:
-      "L'équipe est réactive et créative. Nos animations en présentiel sont toujours un succès auprès de nos commerçants galerie.",
+      "L'équipe est réactive et créative. Nos animations en présentiel avec le système LIVECODE sont toujours un succès auprès de nos commerçants galerie chaque année.",
     rating: 5,
   },
 ];
