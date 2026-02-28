@@ -15,7 +15,7 @@ const testimonials = [
     role: "DG agence",
     company: "VIVACITY",
     content:
-      "Nous avons organisé un jeu WINGO pour l'un de nos partenaire qui a vraiment apprécié la méthode, avec un code à saisir pour créer des lignes de WINGO, les clients sont revenus 3x plus en magasin sur la période",
+      "Nous avons organisé un jeu WINGO pour l'un de nos partenaire qui a vraiment apprécié la méthode, avec un code à saisir en présentiel pour créer des lignes de WINGO, les clients sont revenus 3x plus en magasin sur la période",
     rating: 5,
   },
   {
