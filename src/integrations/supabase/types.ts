@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      portfolio_images: {
+        Row: {
+          created_at: string
+          display_order: number
+          id: string
+          image_url: string
+          title: string | null
+          uploaded_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          image_url: string
+          title?: string | null
+          uploaded_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          image_url?: string
+          title?: string | null
+          uploaded_by?: string | null
+        }
+        Relationships: []
+      }
       service_content: {
         Row: {
           description: string | null
