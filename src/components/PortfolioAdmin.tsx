@@ -100,18 +100,12 @@ export const PortfolioAdmin = ({ images, onUpdate }: Props) => {
 
       <div className="flex flex-col gap-3">
         <div className="flex flex-col sm:flex-row gap-3">
-          <label className="flex-1 cursor-pointer">
-            <div className="flex items-center gap-2 px-4 py-2 rounded-md border border-input bg-background text-sm text-muted-foreground hover:bg-secondary/50 transition-colors">
-              <Upload className="w-4 h-4" />
-              {selectedFile ? selectedFile.name : "Choisir une image..."}
-            </div>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-              className="hidden"
-            />
-          </label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="flex-1 h-10 rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground file:mr-3 file:rounded-md file:border-0 file:bg-primary file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-primary-foreground hover:file:bg-primary/90"
+          />
           <Input
             placeholder="Titre (optionnel)"
             value={title}
