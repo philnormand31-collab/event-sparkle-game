@@ -18,49 +18,71 @@ export const PortfolioAdmin = ({ images, onUpdate }: Props) => {
 
   const handleUpload = async () => {
     const file = fileRef.current?.files?.[0];
-    if (!file) return toast.error("Sélectionnez une image");
-    if (images.length >= 8) return toast.error("Maximum 8 images atteint");
-
-    setUploading(true);
-    const ext = file.name.split(".").pop();
-    const path = `${crypto.randomUUID()}.${ext}`;
-
-    const { error: storageError } = await supabase.storage
-      .from("portfolio-images")
-      .upload(path, file);
-
-    if (storageError) {
-      setUploading(false);
-      return toast.error("Erreur upload : " + storageError.message);
+    if (!file) {
+      toast.error("Sélectionnez une image");
+      return;
+    }
+    if (images.length >= 8) {
+      toast.error("Maximum 8 images atteint");
+      return;
     }
 
-    const { data: urlData } = supabase.storage
-      .from("portfolio-images")
-      .getPublicUrl(path);
+    setUploading(true);
+    try {
+      const ext = file.name.split(".").pop();
+      const path = `${crypto.randomUUID()}.${ext}`;
 
-    const { error: dbError } = await supabase.from("portfolio_images").insert({
-      image_url: urlData.publicUrl,
-      title: title || null,
-      display_order: images.length,
-    });
+      const { error: storageError } = await supabase.storage
+        .from("portfolio-images")
+        .upload(path, file);
 
-    setUploading(false);
-    if (dbError) return toast.error("Erreur DB : " + dbError.message);
+      if (storageError) {
+        toast.error("Erreur upload : " + storageError.message);
+        return;
+      }
 
-    toast.success("Image ajoutée !");
-    setTitle("");
-    if (fileRef.current) fileRef.current.value = "";
-    onUpdate();
+      const { data: urlData } = supabase.storage
+        .from("portfolio-images")
+        .getPublicUrl(path);
+
+      const { error: dbError } = await (supabase as any)
+        .from("portfolio_images")
+        .insert({
+          image_url: urlData.publicUrl,
+          title: title || null,
+          display_order: images.length,
+        });
+
+      if (dbError) {
+        toast.error("Erreur DB : " + dbError.message);
+        return;
+      }
+
+      toast.success("Image ajoutée !");
+      setTitle("");
+      if (fileRef.current) fileRef.current.value = "";
+      onUpdate();
+    } catch (err) {
+      console.error("Upload error:", err);
+      toast.error("Erreur inattendue lors de l'upload");
+    } finally {
+      setUploading(false);
+    }
   };
 
   const handleDelete = async (img: PortfolioImage) => {
-    const fileName = img.image_url.split("/").pop();
-    if (fileName) {
-      await supabase.storage.from("portfolio-images").remove([fileName]);
+    try {
+      const fileName = img.image_url.split("/").pop();
+      if (fileName) {
+        await supabase.storage.from("portfolio-images").remove([fileName]);
+      }
+      await (supabase as any).from("portfolio_images").delete().eq("id", img.id);
+      toast.success("Image supprimée");
+      onUpdate();
+    } catch (err) {
+      console.error("Delete error:", err);
+      toast.error("Erreur lors de la suppression");
     }
-    await supabase.from("portfolio_images").delete().eq("id", img.id);
-    toast.success("Image supprimée");
-    onUpdate();
   };
 
   return (
@@ -70,11 +92,11 @@ export const PortfolioAdmin = ({ images, onUpdate }: Props) => {
       </h3>
 
       <div className="flex flex-col sm:flex-row gap-3">
-        <Input
+        <input
           ref={fileRef}
           type="file"
           accept="image/*"
-          className="flex-1"
+          className="flex-1 text-sm text-muted-foreground file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-primary file:text-primary-foreground hover:file:bg-primary/90 cursor-pointer"
         />
         <Input
           placeholder="Titre (optionnel)"
