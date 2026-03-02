@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { MonitorSmartphone, Mail, Phone, MapPin, Linkedin, Facebook, Instagram } from "lucide-react";
 
 const footerLinks = {
@@ -23,6 +23,23 @@ const footerLinks = {
 };
 
 export const Footer = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleServiceClick = (serviceIndex: number) => {
+    if (location.pathname !== "/") {
+      navigate("/#services");
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('open-service', { detail: serviceIndex }));
+      }, 800);
+    } else {
+      document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('open-service', { detail: serviceIndex }));
+      }, 500);
+    }
+  };
+
   return (
     <footer className="relative bg-card border-t border-border/50">
       <div className="max-w-7xl mx-auto px-6 py-16 lg:px-12">
@@ -66,12 +83,7 @@ export const Footer = () => {
               {footerLinks.services.map((link) =>
               <li key={link.name}>
                   <button
-                  onClick={() => {
-                    document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-                    setTimeout(() => {
-                      window.dispatchEvent(new CustomEvent('open-service', { detail: link.serviceIndex }));
-                    }, 500);
-                  }}
+                  onClick={() => handleServiceClick(link.serviceIndex)}
                   className="text-muted-foreground hover:text-foreground transition-colors text-sm text-left">
                     {link.name}
                   </button>
