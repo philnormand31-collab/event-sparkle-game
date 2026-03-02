@@ -16,7 +16,7 @@ export interface PortfolioImage {
 const Portfolio = () => {
   const [images, setImages] = useState<PortfolioImage[]>([]);
   const [loading, setLoading] = useState(true);
-  const { isAdmin, loading: authLoading } = useAuth();
+  const { user, isAdmin, loading: authLoading } = useAuth();
 
   const fetchImages = async () => {
     try {
@@ -56,6 +56,14 @@ const Portfolio = () => {
           {!authLoading && isAdmin && (
             <PortfolioAdmin images={images} onUpdate={fetchImages} />
           )}
+
+          {!authLoading && user && !isAdmin && (
+            <p className="text-sm text-muted-foreground text-center mb-8">
+              Compte connecté sans droits admin : l’upload n’est pas disponible.
+            </p>
+          )}
+
+          <PortfolioGallery images={images} loading={loading} />
 
           <PortfolioGallery images={images} loading={loading} />
         </div>
