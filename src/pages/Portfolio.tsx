@@ -19,12 +19,20 @@ const Portfolio = () => {
   const { isAdmin } = useAuth();
 
   const fetchImages = async () => {
-    const { data } = await supabase
-      .from("portfolio_images")
-      .select("id, image_url, title, display_order")
-      .order("display_order", { ascending: true });
-    setImages(data ?? []);
-    setLoading(false);
+    try {
+      const { data, error } = await (supabase as any)
+        .from("portfolio_images")
+        .select("id, image_url, title, display_order")
+        .order("display_order", { ascending: true });
+      if (error) {
+        console.error("Error fetching portfolio images:", error);
+      }
+      setImages(data ?? []);
+    } catch (err) {
+      console.error("Portfolio fetch error:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
