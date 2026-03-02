@@ -8,44 +8,62 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchAdminStatus = useCallback(async (currentUser: User | null) => {
-    if (!currentUser) {
-      setIsAdmin(false);
-      return;
-    }
+    if (!currentUser) return false;
 
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("user_roles")
       .select("role")
       .eq("user_id", currentUser.id)
       .eq("role", "admin")
       .maybeSingle();
 
-    setIsAdmin(!!data);
+    if (error) {
+      console.error("Erreur vérification rôle admin:", error);
+      return false;
+    }
+
+    return !!data;
   }, []);
 
   useEffect(() => {
     let isMounted = true;
 
-    const init = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!isMounted) return;
+    const syncFromSession = async () => {
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
 
-      const currentUser = session?.user ?? null;
-      setUser(currentUser);
-      await fetchAdminStatus(currentUser);
-      if (isMounted) setLoading(false);
+        if (!isMounted) return;
+
+        const currentUser = session?.user ?? null;
+        setUser(currentUser);
+
+        const admin = await fetchAdminStatus(currentUser);
+        if (!isMounted) return;
+        setIsAdmin(admin);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
     };
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      const currentUser = session?.user ?? null;
       if (!isMounted) return;
 
-      const currentUser = session?.user ?? null;
       setUser(currentUser);
-      await fetchAdminStatus(currentUser);
-      if (isMounted) setLoading(false);
+      fetchAdminStatus(currentUser)
+        .then((admin) => {
+          if (isMounted) setIsAdmin(admin);
+        })
+        .finally(() => {
+          if (isMounted) setLoading(false);
+        });
     });
 
-    init();
+    void syncFromSession();
 
     return () => {
       isMounted = false;
