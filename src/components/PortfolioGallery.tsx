@@ -26,9 +26,14 @@ export const PortfolioGallery = ({ images, loading }: Props) => {
 
   if (images.length === 0) {
     return (
-      <p className="text-center text-muted-foreground py-20">
-        Aucune image pour le moment.
-      </p>
+      <div className="text-center py-20">
+        <p className="text-muted-foreground text-lg">
+          Aucune image pour le moment.
+        </p>
+        <p className="text-muted-foreground/60 text-sm mt-2">
+          Connectez-vous en admin pour ajouter des photos.
+        </p>
+      </div>
     );
   }
 
