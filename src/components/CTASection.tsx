@@ -59,7 +59,7 @@ export const CTASection = () => {
           </h2>
 
           <p className="text-muted-foreground text-lg mb-2 max-w-2xl mx-auto">
-            Pas de blabla, ce que vous souhaitez, ce sont des résultats.
+            Pas de blabla, parce que vous souhaitez des résultats ;
           </p>
           <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">
             <span className="gradient-text-accent">Une visio avec un spécialiste</span> pour tout savoir, même le prix !
