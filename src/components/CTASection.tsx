@@ -78,7 +78,7 @@ export const CTASection = () => {
               Ils nous font confiance
             </p>
             <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
-              {["Carrefour", "Leclerc", "Auchan", "Casino", "Intermarché"].map(
+              {["PARTOUCHE", "E.LECLERC", "C.Cial ROQUES", "VEO cinémas", "NRJ GLOBAL"].map(
                 (brand, index) => (
                   <span
                     key={index}
