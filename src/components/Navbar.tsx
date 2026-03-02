@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, MonitorSmartphone, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,21 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
   const { user, isAdmin } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleNavClick = (e: React.MouseEvent, link: typeof navLinks[number]) => {
+    e.preventDefault();
+    if ('isContact' in link && link.isContact) {
+      setBookingOpen(true);
+      return;
+    }
+    if (location.pathname !== "/") {
+      navigate("/" + link.href);
+    } else {
+      document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -36,7 +52,7 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto">
         <div className="glass-card rounded-2xl px-6 py-3 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3">
+          <a href="/" onClick={(e) => { e.preventDefault(); navigate("/"); }} className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
               <MonitorSmartphone className="w-5 h-5 text-primary-foreground" />
             </div>
@@ -51,14 +67,8 @@ export const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
-              onClick={(e) => {
-                if ('isContact' in link && link.isContact) {
-                  e.preventDefault();
-                  setBookingOpen(true);
-                }
-              }}
+              onClick={(e) => handleNavClick(e, link)}
               className="text-muted-foreground hover:text-foreground transition-colors duration-300 text-sm font-medium cursor-pointer">
-
                 {link.name}
               </a>
             )}
@@ -101,15 +111,8 @@ export const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                onClick={(e) => {
-                  if ('isContact' in link && link.isContact) {
-                    e.preventDefault();
-                    setBookingOpen(true);
-                  }
-                  setIsOpen(false);
-                }}
+                onClick={(e) => { handleNavClick(e, link); setIsOpen(false); }}
                 className="text-muted-foreground hover:text-foreground transition-colors duration-300 text-base font-medium py-2 cursor-pointer">
-
                     {link.name}
                   </a>
               )}
