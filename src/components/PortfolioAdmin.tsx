@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,11 +14,15 @@ interface Props {
 export const PortfolioAdmin = ({ images, onUpdate }: Props) => {
   const [uploading, setUploading] = useState(false);
   const [title, setTitle] = useState("");
-  const fileRef = useRef<HTMLInputElement>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] ?? null;
+    setSelectedFile(file);
+  };
 
   const handleUpload = async () => {
-    const file = fileRef.current?.files?.[0];
-    if (!file) {
+    if (!selectedFile) {
       toast.error("Sélectionnez une image");
       return;
     }
@@ -29,14 +33,15 @@ export const PortfolioAdmin = ({ images, onUpdate }: Props) => {
 
     setUploading(true);
     try {
-      const ext = file.name.split(".").pop();
+      const ext = selectedFile.name.split(".").pop();
       const path = `${crypto.randomUUID()}.${ext}`;
 
       const { error: storageError } = await supabase.storage
         .from("portfolio-images")
-        .upload(path, file);
+        .upload(path, selectedFile);
 
       if (storageError) {
+        console.error("Storage error:", storageError);
         toast.error("Erreur upload : " + storageError.message);
         return;
       }
@@ -54,13 +59,14 @@ export const PortfolioAdmin = ({ images, onUpdate }: Props) => {
         });
 
       if (dbError) {
+        console.error("DB error:", dbError);
         toast.error("Erreur DB : " + dbError.message);
         return;
       }
 
       toast.success("Image ajoutée !");
       setTitle("");
-      if (fileRef.current) fileRef.current.value = "";
+      setSelectedFile(null);
       onUpdate();
     } catch (err) {
       console.error("Upload error:", err);
@@ -72,7 +78,8 @@ export const PortfolioAdmin = ({ images, onUpdate }: Props) => {
 
   const handleDelete = async (img: PortfolioImage) => {
     try {
-      const fileName = img.image_url.split("/").pop();
+      const urlParts = img.image_url.split("/");
+      const fileName = urlParts[urlParts.length - 1]?.split("?")[0];
       if (fileName) {
         await supabase.storage.from("portfolio-images").remove([fileName]);
       }
@@ -91,27 +98,35 @@ export const PortfolioAdmin = ({ images, onUpdate }: Props) => {
         Gestion du portfolio
       </h3>
 
-      <div className="flex flex-col sm:flex-row gap-3">
-        <input
-          ref={fileRef}
-          type="file"
-          accept="image/*"
-          className="flex-1 text-sm text-muted-foreground file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-primary file:text-primary-foreground hover:file:bg-primary/90 cursor-pointer"
-        />
-        <Input
-          placeholder="Titre (optionnel)"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="flex-1"
-        />
-        <Button onClick={handleUpload} disabled={uploading}>
-          {uploading ? (
-            <Loader2 className="w-4 h-4 animate-spin mr-2" />
-          ) : (
-            <Upload className="w-4 h-4 mr-2" />
-          )}
-          Ajouter
-        </Button>
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-col sm:flex-row gap-3">
+          <label className="flex-1 cursor-pointer">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-md border border-input bg-background text-sm text-muted-foreground hover:bg-secondary/50 transition-colors">
+              <Upload className="w-4 h-4" />
+              {selectedFile ? selectedFile.name : "Choisir une image..."}
+            </div>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              className="hidden"
+            />
+          </label>
+          <Input
+            placeholder="Titre (optionnel)"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="flex-1"
+          />
+          <Button onClick={handleUpload} disabled={uploading || !selectedFile}>
+            {uploading ? (
+              <Loader2 className="w-4 h-4 animate-spin mr-2" />
+            ) : (
+              <Upload className="w-4 h-4 mr-2" />
+            )}
+            Ajouter
+          </Button>
+        </div>
       </div>
 
       {images.length > 0 && (

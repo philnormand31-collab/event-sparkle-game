@@ -16,7 +16,7 @@ export interface PortfolioImage {
 const Portfolio = () => {
   const [images, setImages] = useState<PortfolioImage[]>([]);
   const [loading, setLoading] = useState(true);
-  const { isAdmin } = useAuth();
+  const { isAdmin, loading: authLoading } = useAuth();
 
   const fetchImages = async () => {
     try {
@@ -53,7 +53,9 @@ const Portfolio = () => {
             </p>
           </div>
 
-          {isAdmin && <PortfolioAdmin images={images} onUpdate={fetchImages} />}
+          {!authLoading && isAdmin && (
+            <PortfolioAdmin images={images} onUpdate={fetchImages} />
+          )}
 
           <PortfolioGallery images={images} loading={loading} />
         </div>
