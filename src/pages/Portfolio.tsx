@@ -64,8 +64,6 @@ const Portfolio = () => {
           )}
 
           <PortfolioGallery images={images} loading={loading} />
-
-          <PortfolioGallery images={images} loading={loading} />
         </div>
       </main>
       <Footer />
