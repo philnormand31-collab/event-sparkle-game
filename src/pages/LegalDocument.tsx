@@ -16,22 +16,46 @@ const LegalDocument = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
+    let createdObjectUrl: string | null = null;
+
     const fetchDoc = async () => {
       if (!slug) return;
+
       setLoading(true);
+      setPdfUrl(null);
+
       const { data } = await supabase.storage
         .from("legal-documents")
         .list(slug, { limit: 1 });
 
       if (data && data.length > 0) {
-        const { data: urlData } = supabase.storage
+        const filePath = `${slug}/${data[0].name}`;
+        const { data: fileData, error } = await supabase.storage
           .from("legal-documents")
-          .getPublicUrl(`${slug}/${data[0].name}`);
-        setPdfUrl(urlData.publicUrl);
+          .download(filePath);
+
+        if (!error && fileData) {
+          createdObjectUrl = URL.createObjectURL(fileData);
+          if (isMounted) {
+            setPdfUrl(createdObjectUrl);
+          }
+        }
       }
-      setLoading(false);
+
+      if (isMounted) {
+        setLoading(false);
+      }
     };
+
     fetchDoc();
+
+    return () => {
+      isMounted = false;
+      if (createdObjectUrl) {
+        URL.revokeObjectURL(createdObjectUrl);
+      }
+    };
   }, [slug]);
 
   const title = slug ? TITLES[slug] || slug : "Document";
