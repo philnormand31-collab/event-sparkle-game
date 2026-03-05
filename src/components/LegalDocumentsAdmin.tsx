@@ -1,98 +1,56 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Upload, FileText, Trash2 } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { FileText, Save } from "lucide-react";
 import { toast } from "sonner";
 
 const DOCUMENTS = [
-  { key: "mentions-legales", label: "Mentions légales" },
-  { key: "cgv", label: "CGV" },
+  { slug: "mentions-legales", label: "Mentions légales" },
+  { slug: "cgv", label: "Conditions Générales de Vente" },
 ];
 
 export const LegalDocumentsAdmin = () => {
-  const [uploading, setUploading] = useState<string | null>(null);
-  const [existingDocs, setExistingDocs] = useState<Record<string, string>>({});
-
-  const fetchExistingDocs = async () => {
-    const docs: Record<string, string> = {};
-    for (const doc of DOCUMENTS) {
-      const { data } = await supabase.storage
-        .from("legal-documents")
-        .list(doc.key, { limit: 1 });
-      if (data && data.length > 0) {
-        const { data: urlData } = supabase.storage
-          .from("legal-documents")
-          .getPublicUrl(`${doc.key}/${data[0].name}`);
-        docs[doc.key] = urlData.publicUrl;
-      }
-    }
-    setExistingDocs(docs);
-  };
+  const [contents, setContents] = useState<Record<string, string>>({});
+  const [saving, setSaving] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchExistingDocs();
+    const fetchDocs = async () => {
+      const { data } = await supabase
+        .from("legal_documents")
+        .select("slug, content");
+      if (data) {
+        const map: Record<string, string> = {};
+        data.forEach((d) => (map[d.slug] = d.content));
+        setContents(map);
+      }
+    };
+    fetchDocs();
   }, []);
 
-  const handleUpload = async (docKey: string, file: File) => {
-    if (file.type !== "application/pdf") {
-      toast.error("Seuls les fichiers PDF sont acceptés");
-      return;
+  const handleSave = async (slug: string) => {
+    setSaving(slug);
+    const { error } = await supabase
+      .from("legal_documents")
+      .update({ content: contents[slug] || "" })
+      .eq("slug", slug);
+
+    if (error) {
+      toast.error("Erreur lors de la sauvegarde");
+      console.error(error);
+    } else {
+      toast.success("Document sauvegardé avec succès");
     }
-
-    setUploading(docKey);
-    try {
-      // Delete existing files in the folder
-      const { data: existing } = await supabase.storage
-        .from("legal-documents")
-        .list(docKey);
-      if (existing && existing.length > 0) {
-        await supabase.storage
-          .from("legal-documents")
-          .remove(existing.map((f) => `${docKey}/${f.name}`));
-      }
-
-      // Sanitize filename: remove accents, spaces, special chars
-      const sanitized = file.name
-        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-        .replace(/\s+/g, "_")
-        .replace(/[^a-zA-Z0-9._-]/g, "");
-      const path = `${docKey}/${sanitized}`;
-      const { error } = await supabase.storage
-        .from("legal-documents")
-        .upload(path, file, { upsert: true });
-
-      if (error) {
-        toast.error("Erreur lors du téléchargement");
-        console.error(error);
-      } else {
-        toast.success("Document téléchargé avec succès");
-        await fetchExistingDocs();
-      }
-    } finally {
-      setUploading(null);
-    }
-  };
-
-  const handleDelete = async (docKey: string) => {
-    const { data: existing } = await supabase.storage
-      .from("legal-documents")
-      .list(docKey);
-    if (existing && existing.length > 0) {
-      await supabase.storage
-        .from("legal-documents")
-        .remove(existing.map((f) => `${docKey}/${f.name}`));
-      toast.success("Document supprimé");
-      await fetchExistingDocs();
-    }
+    setSaving(null);
   };
 
   return (
     <div className="space-y-6">
       <h3 className="text-lg font-semibold text-foreground">Documents légaux</h3>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="space-y-6">
         {DOCUMENTS.map((doc) => (
           <div
-            key={doc.key}
+            key={doc.slug}
             className="rounded-xl border border-border/50 bg-card p-5 space-y-3"
           >
             <div className="flex items-center gap-2">
@@ -100,73 +58,23 @@ export const LegalDocumentsAdmin = () => {
               <span className="font-medium text-foreground">{doc.label}</span>
             </div>
 
-            {existingDocs[doc.key] ? (
-              <div className="space-y-2">
-                <a
-                  href={existingDocs[doc.key]}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-primary underline"
-                >
-                  Voir le document actuel
-                </a>
-                <div className="flex gap-2">
-                  <label className="flex-1">
-                    <input
-                      type="file"
-                      accept=".pdf"
-                      className="hidden"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) handleUpload(doc.key, file);
-                      }}
-                    />
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="w-full"
-                      disabled={uploading === doc.key}
-                      asChild
-                    >
-                      <span>
-                        <Upload className="w-4 h-4" />
-                        {uploading === doc.key ? "Envoi…" : "Remplacer"}
-                      </span>
-                    </Button>
-                  </label>
-                  <Button
-                    variant="destructive"
-                    size="sm"
-                    onClick={() => handleDelete(doc.key)}
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-            ) : (
-              <label>
-                <input
-                  type="file"
-                  accept=".pdf"
-                  className="hidden"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) handleUpload(doc.key, file);
-                  }}
-                />
-                <Button
-                  variant="outline"
-                  className="w-full"
-                  disabled={uploading === doc.key}
-                  asChild
-                >
-                  <span>
-                    <Upload className="w-4 h-4" />
-                    {uploading === doc.key ? "Envoi…" : "Télécharger un PDF"}
-                  </span>
-                </Button>
-              </label>
-            )}
+            <Textarea
+              value={contents[doc.slug] || ""}
+              onChange={(e) =>
+                setContents((prev) => ({ ...prev, [doc.slug]: e.target.value }))
+              }
+              placeholder={`Collez ici le texte de vos ${doc.label}…`}
+              className="min-h-[200px] text-sm leading-relaxed"
+            />
+
+            <Button
+              onClick={() => handleSave(doc.slug)}
+              disabled={saving === doc.slug}
+              size="sm"
+            >
+              <Save className="w-4 h-4" />
+              {saving === doc.slug ? "Sauvegarde…" : "Enregistrer"}
+            </Button>
           </div>
         ))}
       </div>
