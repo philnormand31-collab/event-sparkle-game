@@ -126,7 +126,14 @@ export const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.legal.map((link) =>
               <li key={link.name}>
-                  {link.href.startsWith("/") ? (
+                  {'action' in link && link.action === 'open-cookies' ? (
+                    <button
+                      onClick={() => window.dispatchEvent(new CustomEvent('open-cookie-settings'))}
+                      className="text-muted-foreground hover:text-foreground transition-colors text-sm text-left"
+                    >
+                      {link.name}
+                    </button>
+                  ) : link.href.startsWith("/") ? (
                     <Link
                       to={link.href}
                       className="text-muted-foreground hover:text-foreground transition-colors text-sm"
