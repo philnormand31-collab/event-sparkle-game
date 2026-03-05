@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      legal_documents: {
+        Row: {
+          content: string
+          id: string
+          slug: string
+          title: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          content?: string
+          id?: string
+          slug: string
+          title: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          content?: string
+          id?: string
+          slug?: string
+          title?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       portfolio_images: {
         Row: {
           created_at: string
