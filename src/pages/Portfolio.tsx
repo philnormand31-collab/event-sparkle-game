@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { PortfolioGallery } from "@/components/PortfolioGallery";
 import { PortfolioAdmin } from "@/components/PortfolioAdmin";
+import { LegalDocumentsAdmin } from "@/components/LegalDocumentsAdmin";
 import { useAuth } from "@/hooks/useAuth";
 
 export interface PortfolioImage {
@@ -54,7 +55,12 @@ const Portfolio = () => {
           </div>
 
           {!authLoading && isAdmin && (
-            <PortfolioAdmin images={images} onUpdate={fetchImages} />
+            <>
+              <PortfolioAdmin images={images} onUpdate={fetchImages} />
+              <div className="mt-10">
+                <LegalDocumentsAdmin />
+              </div>
+            </>
           )}
 
           {!authLoading && user && !isAdmin && (
