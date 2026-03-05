@@ -51,7 +51,12 @@ export const LegalDocumentsAdmin = () => {
           .remove(existing.map((f) => `${docKey}/${f.name}`));
       }
 
-      const path = `${docKey}/${file.name}`;
+      // Sanitize filename: remove accents, spaces, special chars
+      const sanitized = file.name
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, "_")
+        .replace(/[^a-zA-Z0-9._-]/g, "");
+      const path = `${docKey}/${sanitized}`;
       const { error } = await supabase.storage
         .from("legal-documents")
         .upload(path, file, { upsert: true });

@@ -57,13 +57,31 @@ const LegalDocument = () => {
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
           </div>
         ) : pdfUrl ? (
-          <div className="rounded-xl overflow-hidden border border-border/50 bg-card">
-            <iframe
-              src={pdfUrl}
-              className="w-full"
-              style={{ height: "80vh" }}
-              title={title}
-            />
+          <div className="space-y-4">
+            <a
+              href={pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+            >
+              <FileText className="w-4 h-4" />
+              Ouvrir le document en plein écran
+            </a>
+            <div className="rounded-xl overflow-hidden border border-border/50 bg-card">
+              <object
+                data={pdfUrl}
+                type="application/pdf"
+                className="w-full"
+                style={{ height: "80vh" }}
+              >
+                <p className="p-8 text-center text-muted-foreground">
+                  Votre navigateur ne peut pas afficher ce PDF.{" "}
+                  <a href={pdfUrl} target="_blank" rel="noopener noreferrer" className="text-primary underline">
+                    Cliquez ici pour le télécharger
+                  </a>.
+                </p>
+              </object>
+            </div>
           </div>
         ) : (
           <div className="text-center py-20 text-muted-foreground">
