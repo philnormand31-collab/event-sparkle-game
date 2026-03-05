@@ -78,7 +78,7 @@ export const HeroSection = () => {
           className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
 
           Quand vos clients{" "}
-          <span className="gradient-text">s'amusent</span>, vos ventes{" "}
+          <span className="gradient-text">s'amusent</span><span className="whitespace-nowrap">, vos</span> ventes{" "}
           <span className="gradient-text-accent">explosent</span> !
         </motion.h1>
 
