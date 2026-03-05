@@ -6,6 +6,7 @@ import { BenefitsSection } from "@/components/BenefitsSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
+import { CookieBanner } from "@/components/CookieBanner";
 
 const Index = () => {
   return (
@@ -18,6 +19,7 @@ const Index = () => {
       <TestimonialsSection />
       <CTASection />
       <Footer />
+      <CookieBanner />
     </div>
   );
 };
