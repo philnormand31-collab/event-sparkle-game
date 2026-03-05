@@ -67,6 +67,13 @@ export const CookieConsent = () => {
     if (!consent) {
       setVisible(true);
     }
+
+    const handleReopen = () => {
+      setShowSettings(false);
+      setVisible(true);
+    };
+    window.addEventListener("open-cookie-settings", handleReopen);
+    return () => window.removeEventListener("open-cookie-settings", handleReopen);
   }, []);
 
   const acceptAll = () => {
