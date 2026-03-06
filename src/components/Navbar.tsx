@@ -13,7 +13,7 @@ const navLinks = [
 { name: "Services", href: "#services" },
 { name: "Comment ça marche", href: "#how-it-works" },
 { name: "Avantages", href: "#benefits" },
-{ name: "Contact", href: "#contact", isContact: true }] as const;
+{ name: "Action", href: "#action" }] as const;
 
 
 export const Navbar = () => {
@@ -25,10 +25,6 @@ export const Navbar = () => {
 
   const handleNavClick = (e: React.MouseEvent, link: typeof navLinks[number]) => {
     e.preventDefault();
-    if ('isContact' in link && link.isContact) {
-      setBookingOpen(true);
-      return;
-    }
     if ('isTop' in link && link.isTop) {
       if (location.pathname !== "/") {
         navigate("/");
