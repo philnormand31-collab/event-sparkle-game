@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 const navLinks = [
+{ name: "Accueil", href: "#top", isTop: true },
 { name: "Services", href: "#services" },
 { name: "Comment ça marche", href: "#how-it-works" },
 { name: "Avantages", href: "#benefits" },
@@ -26,6 +27,14 @@ export const Navbar = () => {
     e.preventDefault();
     if ('isContact' in link && link.isContact) {
       setBookingOpen(true);
+      return;
+    }
+    if ('isTop' in link && link.isTop) {
+      if (location.pathname !== "/") {
+        navigate("/");
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
       return;
     }
     if (location.pathname !== "/") {
