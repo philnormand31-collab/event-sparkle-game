@@ -19,7 +19,7 @@ export const CTASection = () => {
     <>
     <BookingDialog open={bookingOpen} onOpenChange={setBookingOpen} onConfirm={handleBookingConfirm} />
     <ContactDialog open={contactOpen} onOpenChange={setContactOpen} bookingInfo={bookingInfo} />
-    <section id="contact" className="section-padding relative overflow-hidden">
+    <section id="action" className="section-padding relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-secondary/20 to-background" />
       <div 
