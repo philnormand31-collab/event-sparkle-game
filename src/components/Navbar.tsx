@@ -25,10 +25,6 @@ export const Navbar = () => {
 
   const handleNavClick = (e: React.MouseEvent, link: typeof navLinks[number]) => {
     e.preventDefault();
-    if ('isContact' in link && link.isContact) {
-      setBookingOpen(true);
-      return;
-    }
     if ('isTop' in link && link.isTop) {
       if (location.pathname !== "/") {
         navigate("/");
