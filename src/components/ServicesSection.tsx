@@ -106,7 +106,7 @@ export const ServicesSection = () => {
 
   return (
     <>
-    <section id="services" className="section-padding !pt-10 md:!pt-14 relative">
+    <section id="services" className="section-padding relative">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-secondary/20 to-background" />
 
