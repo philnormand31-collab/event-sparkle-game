@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Zap, Trophy } from "lucide-react";
+import { ArrowRight, Sparkles, Zap, Clover } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BookingDialog, BookingInfo } from "@/components/BookingDialog";
 import { ContactDialog } from "@/components/ContactDialog";
@@ -41,7 +41,7 @@ export const HeroSection = () => {
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
 
         <div className="glass-card p-4 rounded-2xl">
-          <Trophy className="w-8 h-8 text-accent" />
+          <Clover className="w-8 h-8 text-accent" />
         </div>
       </motion.div>
 
@@ -66,7 +66,7 @@ export const HeroSection = () => {
 
           <Sparkles className="w-4 h-4 text-accent" />
           <span className="text-sm font-medium text-muted-foreground">
-            Leader de la gamification marketing
+            Leader du marketing expérientiel
           </span>
         </motion.div>
 
