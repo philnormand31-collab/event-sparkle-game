@@ -133,25 +133,6 @@ export const Footer = () => {
                     >
                       {link.name}
                     </button>
-                  ) : 'action' in link && link.action === 'open-privacy-pdf' ? (
-                    <button
-                      onClick={async () => {
-                        const { data } = await supabase.storage
-                          .from("legal-documents")
-                          .list("", { search: "politique-de-confidentialite.pdf" });
-                        if (data && data.length > 0) {
-                          const { data: urlData } = supabase.storage
-                            .from("legal-documents")
-                            .getPublicUrl("politique-de-confidentialite.pdf");
-                          window.open(urlData.publicUrl, "_blank");
-                        } else {
-                          toast.info("Ce document n'est pas encore disponible.");
-                        }
-                      }}
-                      className="text-muted-foreground hover:text-foreground transition-colors text-sm text-left"
-                    >
-                      {link.name}
-                    </button>
                   ) : link.href.startsWith("/") ? (
                     <Link
                       to={link.href}
