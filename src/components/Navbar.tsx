@@ -73,7 +73,7 @@ export const Navbar = () => {
               key={link.name}
               href={link.href}
               onClick={(e) => handleNavClick(e, link)}
-              className="text-muted-foreground hover:text-foreground transition-colors duration-300 text-sm font-medium cursor-pointer">
+              className={`hover:text-foreground transition-colors duration-300 text-sm font-medium cursor-pointer ${link.name === 'Action' ? 'text-accent font-bold' : 'text-muted-foreground'}`}>
                 {link.name}
               </a>
             )}
