@@ -1,7 +1,5 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { MonitorSmartphone, Mail, Phone, MapPin, Linkedin, Facebook, Instagram } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
 
 const footerLinks = {
   services: [
