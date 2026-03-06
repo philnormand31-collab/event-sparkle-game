@@ -1,7 +1,5 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { MonitorSmartphone, Mail, Phone, MapPin, Linkedin, Facebook, Instagram } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
 
 const footerLinks = {
   services: [
@@ -19,7 +17,7 @@ const footerLinks = {
   legal: [
   { name: "Mentions légales", href: "/legal/mentions-legales" },
   { name: "CGV", href: "/legal/cgv" },
-  { name: "Politique de confidentialité", href: "#", action: "open-privacy-pdf" },
+  { name: "Politique de confidentialité", href: "/legal/politique-de-confidentialite" },
   { name: "Cookies", href: "#", action: "open-cookies" }]
 
 };
@@ -131,25 +129,6 @@ export const Footer = () => {
                   {'action' in link && link.action === 'open-cookies' ? (
                     <button
                       onClick={() => window.dispatchEvent(new CustomEvent('open-cookie-settings'))}
-                      className="text-muted-foreground hover:text-foreground transition-colors text-sm text-left"
-                    >
-                      {link.name}
-                    </button>
-                  ) : 'action' in link && link.action === 'open-privacy-pdf' ? (
-                    <button
-                      onClick={async () => {
-                        const { data } = await supabase.storage
-                          .from("legal-documents")
-                          .list("", { search: "politique-de-confidentialite.pdf" });
-                        if (data && data.length > 0) {
-                          const { data: urlData } = supabase.storage
-                            .from("legal-documents")
-                            .getPublicUrl("politique-de-confidentialite.pdf");
-                          window.open(urlData.publicUrl, "_blank");
-                        } else {
-                          toast.info("Ce document n'est pas encore disponible.");
-                        }
-                      }}
                       className="text-muted-foreground hover:text-foreground transition-colors text-sm text-left"
                     >
                       {link.name}
