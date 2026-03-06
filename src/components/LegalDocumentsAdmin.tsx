@@ -8,10 +8,8 @@ import { toast } from "sonner";
 const DOCUMENTS = [
   { slug: "mentions-legales", label: "Mentions légales" },
   { slug: "cgv", label: "Conditions Générales de Vente" },
+  { slug: "politique-de-confidentialite", label: "Politique de confidentialité" },
 ];
-
-const PRIVACY_PDF_PATH = "politique-de-confidentialite.pdf";
-const BUCKET = "legal-documents";
 
 export const LegalDocumentsAdmin = () => {
   const [contents, setContents] = useState<Record<string, string>>({});
