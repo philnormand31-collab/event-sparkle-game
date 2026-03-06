@@ -29,6 +29,14 @@ export const Navbar = () => {
       setBookingOpen(true);
       return;
     }
+    if ('isTop' in link && link.isTop) {
+      if (location.pathname !== "/") {
+        navigate("/");
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      return;
+    }
     if (location.pathname !== "/") {
       navigate("/" + link.href);
     } else {
