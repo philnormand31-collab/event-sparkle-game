@@ -114,7 +114,7 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
+          className="mt-20 mb-0 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
 
           {[
           { value: "100%", label: "Personnalisable" },
