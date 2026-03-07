@@ -3,9 +3,15 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 
-const logos = [
-  { label: "Logo fond sombre (SVG)", file: "/logo-ludigami.svg", desc: "GAMI en blanc — pour fonds sombres" },
-  { label: "Logo fond clair (SVG)", file: "/logo-ludigami-dark.svg", desc: "GAMI en noir — pour fonds clairs" },
+const svgLogos = [
+  { label: "Logo fond sombre (SVG)", file: "/logo-ludigami.svg", desc: "GAMI en blanc — pour fonds sombres", bg: "bg-background" },
+  { label: "Logo fond clair (SVG)", file: "/logo-ludigami-dark.svg", desc: "GAMI en noir — pour fonds clairs", bg: "bg-white" },
+];
+
+const pngLogos = [
+  { label: "PNG fond sombre (1920×512)", file: "/logo-ludigami-dark-bg.png", desc: "Haute résolution — fonds sombres, digital & print", bg: "bg-background" },
+  { label: "PNG fond clair (1920×512)", file: "/logo-ludigami-light-bg.png", desc: "Haute résolution — fonds clairs, digital & print", bg: "bg-white" },
+  { label: "PNG transparent (1920×512)", file: "/logo-ludigami-transparent.png", desc: "Fond transparent — superposition, montage", bg: "bg-muted" },
 ];
 
 const LogoDownload = () => {
