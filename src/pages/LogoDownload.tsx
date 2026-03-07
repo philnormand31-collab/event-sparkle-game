@@ -3,9 +3,15 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 
-const logos = [
-  { label: "Logo fond sombre (SVG)", file: "/logo-ludigami.svg", desc: "GAMI en blanc — pour fonds sombres" },
-  { label: "Logo fond clair (SVG)", file: "/logo-ludigami-dark.svg", desc: "GAMI en noir — pour fonds clairs" },
+const svgLogos = [
+  { label: "Logo fond sombre (SVG)", file: "/logo-ludigami.svg", desc: "GAMI en blanc — pour fonds sombres", bg: "bg-background" },
+  { label: "Logo fond clair (SVG)", file: "/logo-ludigami-dark.svg", desc: "GAMI en noir — pour fonds clairs", bg: "bg-white" },
+];
+
+const pngLogos = [
+  { label: "PNG fond sombre (1920×512)", file: "/logo-ludigami-dark-bg.png", desc: "Haute résolution — fonds sombres, digital & print", bg: "bg-background" },
+  { label: "PNG fond clair (1920×512)", file: "/logo-ludigami-light-bg.png", desc: "Haute résolution — fonds clairs, digital & print", bg: "bg-white" },
+  { label: "PNG transparent (1920×512)", file: "/logo-ludigami-transparent.png", desc: "Fond transparent — superposition, montage", bg: "bg-muted" },
 ];
 
 const LogoDownload = () => {
@@ -26,32 +32,40 @@ const LogoDownload = () => {
               Logo <span className="gradient-text-accent">LUDIGAMI</span>
             </h1>
             <p className="text-muted-foreground text-lg">
-              Téléchargez le logo au format SVG (vectoriel)
+              Téléchargez le logo aux formats SVG et PNG haute résolution
             </p>
           </div>
 
-          <div className="grid gap-8">
-            {logos.map((logo) => (
+          <h2 className="font-display text-2xl font-semibold text-foreground mb-4">SVG (vectoriel)</h2>
+          <div className="grid gap-8 mb-12">
+            {svgLogos.map((logo) => (
               <div key={logo.file} className="glass-card rounded-2xl p-8 flex flex-col sm:flex-row items-center gap-6">
-                <div
-                  className={`flex-1 flex items-center justify-center rounded-xl p-6 ${
-                    logo.file.includes("dark") ? "bg-white" : "bg-background"
-                  }`}
-                >
+                <div className={`flex-1 flex items-center justify-center rounded-xl p-6 ${logo.bg}`}>
                   <img src={logo.file} alt={logo.label} className="max-w-[240px] w-full" />
                 </div>
                 <div className="flex flex-col items-center sm:items-start gap-3 text-center sm:text-left">
                   <h3 className="font-display font-semibold text-foreground">{logo.label}</h3>
                   <p className="text-sm text-muted-foreground">{logo.desc}</p>
-                  <Button
-                    variant="hero"
-                    size="sm"
-                    onClick={() =>
-                      handleDownload(logo.file, logo.file.split("/").pop()!)
-                    }
-                  >
-                    <Download className="w-4 h-4 mr-2" />
-                    Télécharger
+                  <Button variant="hero" size="sm" onClick={() => handleDownload(logo.file, logo.file.split("/").pop()!)}>
+                    <Download className="w-4 h-4 mr-2" /> Télécharger
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <h2 className="font-display text-2xl font-semibold text-foreground mb-4">PNG haute résolution</h2>
+          <div className="grid gap-8">
+            {pngLogos.map((logo) => (
+              <div key={logo.file} className="glass-card rounded-2xl p-8 flex flex-col sm:flex-row items-center gap-6">
+                <div className={`flex-1 flex items-center justify-center rounded-xl p-6 ${logo.bg}`}>
+                  <img src={logo.file} alt={logo.label} className="max-w-[320px] w-full" />
+                </div>
+                <div className="flex flex-col items-center sm:items-start gap-3 text-center sm:text-left">
+                  <h3 className="font-display font-semibold text-foreground">{logo.label}</h3>
+                  <p className="text-sm text-muted-foreground">{logo.desc}</p>
+                  <Button variant="hero" size="sm" onClick={() => handleDownload(logo.file, logo.file.split("/").pop()!)}>
+                    <Download className="w-4 h-4 mr-2" /> Télécharger
                   </Button>
                 </div>
               </div>
