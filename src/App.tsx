@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/AdminLogin";
 import Portfolio from "./pages/Portfolio";
 import LegalDocument from "./pages/LegalDocument";
+import LogoDownload from "./pages/LogoDownload";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/legal/:slug" element={<LegalDocument />} />
+          <Route path="/logo" element={<LogoDownload />} />
           <Route path="/admin" element={<AdminLogin />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
