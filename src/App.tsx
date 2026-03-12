@@ -9,6 +9,7 @@ import AdminLogin from "./pages/AdminLogin";
 import Portfolio from "./pages/Portfolio";
 import LegalDocument from "./pages/LegalDocument";
 import LogoDownload from "./pages/LogoDownload";
+import About from "./pages/About";
 
 const queryClient = new QueryClient();
 
