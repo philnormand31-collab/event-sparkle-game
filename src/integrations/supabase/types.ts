@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      about_page: {
+        Row: {
+          content: string
+          id: string
+          image_url: string | null
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          content?: string
+          id?: string
+          image_url?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          content?: string
+          id?: string
+          image_url?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       legal_documents: {
         Row: {
           content: string
