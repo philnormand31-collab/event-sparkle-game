@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Save, Upload, Trash2, Loader2 } from "lucide-react";
 
 export const AboutAdmin = ({ onSaved }: { onSaved?: () => void }) => {
+  const [contentSide, setContentSide] = useState("");
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -21,6 +22,7 @@ export const AboutAdmin = ({ onSaved }: { onSaved?: () => void }) => {
         .limit(1)
         .single();
       if (data) {
+        setContentSide((data as any).content_side || "");
         setContent(data.content);
         setImageUrl(data.image_url);
         setRowId(data.id);
@@ -35,7 +37,7 @@ export const AboutAdmin = ({ onSaved }: { onSaved?: () => void }) => {
     setSaving(true);
     const { error } = await supabase
       .from("about_page")
-      .update({ content, image_url: imageUrl })
+      .update({ content, content_side: contentSide, image_url: imageUrl } as any)
       .eq("id", rowId);
     setSaving(false);
     if (error) {
@@ -133,13 +135,25 @@ export const AboutAdmin = ({ onSaved }: { onSaved?: () => void }) => {
         )}
       </div>
 
-      {/* Content */}
+      {/* Side content (next to photo) */}
       <div className="space-y-3">
-        <label className="text-sm font-medium text-foreground">Contenu</label>
+        <label className="text-sm font-medium text-foreground">Texte à côté de la photo</label>
+        <Textarea
+          value={contentSide}
+          onChange={(e) => setContentSide(e.target.value)}
+          placeholder="Texte affiché à gauche de la photo..."
+          rows={6}
+          className="resize-y"
+        />
+      </div>
+
+      {/* Full-width content below */}
+      <div className="space-y-3">
+        <label className="text-sm font-medium text-foreground">Texte sous la photo (pleine largeur)</label>
         <Textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="Écrivez le texte de votre page À propos..."
+          placeholder="Texte affiché sous la photo sur toute la largeur..."
           rows={12}
           className="resize-y"
         />

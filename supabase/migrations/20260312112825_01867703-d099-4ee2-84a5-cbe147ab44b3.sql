@@ -1,0 +1,1 @@
+ALTER TABLE public.about_page ADD COLUMN content_side text NOT NULL DEFAULT '';
