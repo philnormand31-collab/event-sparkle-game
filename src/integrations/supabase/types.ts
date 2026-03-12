@@ -17,6 +17,7 @@ export type Database = {
       about_page: {
         Row: {
           content: string
+          content_side: string
           id: string
           image_url: string | null
           updated_at: string
@@ -24,6 +25,7 @@ export type Database = {
         }
         Insert: {
           content?: string
+          content_side?: string
           id?: string
           image_url?: string | null
           updated_at?: string
@@ -31,6 +33,7 @@ export type Database = {
         }
         Update: {
           content?: string
+          content_side?: string
           id?: string
           image_url?: string | null
           updated_at?: string
