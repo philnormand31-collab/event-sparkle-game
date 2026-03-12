@@ -96,6 +96,16 @@ export const AboutAdmin = ({ onSaved }: { onSaved?: () => void }) => {
     <div className="space-y-6">
       <h2 className="font-display text-xl font-bold">Page À propos</h2>
 
+      {/* Title */}
+      <div className="space-y-3">
+        <label className="text-sm font-medium text-foreground">Titre (pleine largeur)</label>
+        <Input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Titre de la page..."
+        />
+      </div>
+
       {/* Image */}
       <div className="space-y-3">
         <label className="text-sm font-medium text-foreground">Photo</label>
