@@ -24,6 +24,7 @@ export const AboutAdmin = ({ onSaved }: { onSaved?: () => void }) => {
         .limit(1)
         .single();
       if (data) {
+        setTitle((data as any).title || "");
         setContentSide((data as any).content_side || "");
         setContent(data.content);
         setImageUrl(data.image_url);
