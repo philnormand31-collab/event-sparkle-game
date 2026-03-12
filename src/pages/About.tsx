@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { AboutAdmin } from "@/components/AboutAdmin";
 
 const About = () => {
+  const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [contentSide, setContentSide] = useState("");
   const [imageUrl, setImageUrl] = useState<string | null>(null);
