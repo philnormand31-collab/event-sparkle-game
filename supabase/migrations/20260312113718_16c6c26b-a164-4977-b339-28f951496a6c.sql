@@ -1,0 +1,1 @@
+ALTER TABLE public.about_page ADD COLUMN title text NOT NULL DEFAULT '';

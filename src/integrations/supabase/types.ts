@@ -20,6 +20,7 @@ export type Database = {
           content_side: string
           id: string
           image_url: string | null
+          title: string
           updated_at: string
           updated_by: string | null
         }
@@ -28,6 +29,7 @@ export type Database = {
           content_side?: string
           id?: string
           image_url?: string | null
+          title?: string
           updated_at?: string
           updated_by?: string | null
         }
@@ -36,6 +38,7 @@ export type Database = {
           content_side?: string
           id?: string
           image_url?: string | null
+          title?: string
           updated_at?: string
           updated_by?: string | null
         }

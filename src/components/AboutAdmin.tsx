@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { Save, Upload, Trash2, Loader2 } from "lucide-react";
 
 export const AboutAdmin = ({ onSaved }: { onSaved?: () => void }) => {
+  const [title, setTitle] = useState("");
   const [contentSide, setContentSide] = useState("");
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -22,6 +24,7 @@ export const AboutAdmin = ({ onSaved }: { onSaved?: () => void }) => {
         .limit(1)
         .single();
       if (data) {
+        setTitle((data as any).title || "");
         setContentSide((data as any).content_side || "");
         setContent(data.content);
         setImageUrl(data.image_url);
@@ -37,7 +40,7 @@ export const AboutAdmin = ({ onSaved }: { onSaved?: () => void }) => {
     setSaving(true);
     const { error } = await supabase
       .from("about_page")
-      .update({ content, content_side: contentSide, image_url: imageUrl } as any)
+      .update({ title, content, content_side: contentSide, image_url: imageUrl } as any)
       .eq("id", rowId);
     setSaving(false);
     if (error) {
@@ -92,6 +95,16 @@ export const AboutAdmin = ({ onSaved }: { onSaved?: () => void }) => {
   return (
     <div className="space-y-6">
       <h2 className="font-display text-xl font-bold">Page À propos</h2>
+
+      {/* Title */}
+      <div className="space-y-3">
+        <label className="text-sm font-medium text-foreground">Titre (pleine largeur)</label>
+        <Input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Titre de la page..."
+        />
+      </div>
 
       {/* Image */}
       <div className="space-y-3">

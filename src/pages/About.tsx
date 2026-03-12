@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { AboutAdmin } from "@/components/AboutAdmin";
 
 const About = () => {
+  const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [contentSide, setContentSide] = useState("");
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -20,6 +21,7 @@ const About = () => {
       .limit(1)
       .single();
     if (data) {
+      setTitle((data as any).title || "");
       setContent(data.content);
       setContentSide((data as any).content_side || "");
       setImageUrl(data.image_url);
@@ -49,12 +51,20 @@ const About = () => {
 
           {loading ? (
             <div className="space-y-4">
+              <Skeleton className="h-10 w-3/4" />
               <Skeleton className="h-6 w-full" />
               <Skeleton className="h-6 w-3/4" />
               <Skeleton className="h-64 w-full rounded-2xl" />
             </div>
           ) : (
             <>
+              {/* Title - full width above photo */}
+              {title && (
+                <h2 className="font-display text-2xl md:text-3xl font-bold mb-8 text-foreground">
+                  {title}
+                </h2>
+              )}
+
               {/* Side-by-side: text left, photo right */}
               {(contentSide || imageUrl) && (
                 <div className="flex flex-col md:flex-row gap-8 mb-10 items-start">
