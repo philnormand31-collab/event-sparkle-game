@@ -34,6 +34,10 @@ export const Navbar = () => {
       }
       return;
     }
+    if ('isPage' in link && link.isPage) {
+      navigate(link.href);
+      return;
+    }
     if (location.pathname !== "/") {
       navigate("/" + link.href);
     } else {
