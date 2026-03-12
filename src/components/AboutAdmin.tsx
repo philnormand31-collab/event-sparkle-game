@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Save, Upload, Trash2, Loader2 } from "lucide-react";
 
 export const AboutAdmin = ({ onSaved }: { onSaved?: () => void }) => {
+  const [contentSide, setContentSide] = useState("");
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
