@@ -13,7 +13,8 @@ const navLinks = [
 { name: "Services", href: "#services" },
 { name: "Comment ça marche", href: "#how-it-works" },
 { name: "Avantages", href: "#benefits" },
-{ name: "Action", href: "#action" }] as const;
+{ name: "Action", href: "#action" },
+{ name: "À propos", href: "/a-propos", isPage: true }] as const;
 
 
 export const Navbar = () => {
@@ -31,6 +32,10 @@ export const Navbar = () => {
       } else {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
+      return;
+    }
+    if ('isPage' in link && link.isPage) {
+      navigate(link.href);
       return;
     }
     if (location.pathname !== "/") {
