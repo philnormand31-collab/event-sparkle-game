@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { PortfolioGallery } from "@/components/PortfolioGallery";
 import { PortfolioAdmin } from "@/components/PortfolioAdmin";
 import { LegalDocumentsAdmin } from "@/components/LegalDocumentsAdmin";
+import { AboutAdmin } from "@/components/AboutAdmin";
 import { useAuth } from "@/hooks/useAuth";
 
 export interface PortfolioImage {
