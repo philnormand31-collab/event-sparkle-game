@@ -21,6 +21,7 @@ const About = () => {
       .limit(1)
       .single();
     if (data) {
+      setTitle((data as any).title || "");
       setContent(data.content);
       setContentSide((data as any).content_side || "");
       setImageUrl(data.image_url);
