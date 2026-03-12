@@ -1,29 +1,33 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useAuth } from "@/hooks/useAuth";
+import { AboutAdmin } from "@/components/AboutAdmin";
 
 const About = () => {
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const { isAdmin, loading: authLoading } = useAuth();
+
+  const fetchData = useCallback(async () => {
+    const { data } = await supabase
+      .from("about_page")
+      .select("content, image_url")
+      .limit(1)
+      .single();
+    if (data) {
+      setContent(data.content);
+      setImageUrl(data.image_url);
+    }
+    setLoading(false);
+  }, []);
 
   useEffect(() => {
-    const fetch = async () => {
-      const { data } = await supabase
-        .from("about_page")
-        .select("content, image_url")
-        .limit(1)
-        .single();
-      if (data) {
-        setContent(data.content);
-        setImageUrl(data.image_url);
-      }
-      setLoading(false);
-    };
-    fetch();
-  }, []);
+    fetchData();
+  }, [fetchData]);
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
@@ -33,6 +37,13 @@ const About = () => {
           <h1 className="font-display text-4xl md:text-5xl font-bold mb-8">
             <span className="text-accent">À</span> propos
           </h1>
+
+          {/* Admin editor */}
+          {!authLoading && isAdmin && (
+            <div className="mb-12 glass-card rounded-2xl p-6 border border-accent/30">
+              <AboutAdmin onSaved={fetchData} />
+            </div>
+          )}
 
           {loading ? (
             <div className="space-y-4">
@@ -53,15 +64,15 @@ const About = () => {
               )}
 
               {content ? (
-                <div
-                  className="prose prose-invert max-w-none text-muted-foreground leading-relaxed whitespace-pre-wrap"
-                >
+                <div className="prose prose-invert max-w-none text-muted-foreground leading-relaxed whitespace-pre-wrap">
                   {content}
                 </div>
               ) : (
-                <p className="text-muted-foreground italic">
-                  Contenu à venir...
-                </p>
+                !isAdmin && (
+                  <p className="text-muted-foreground italic">
+                    Contenu à venir...
+                  </p>
+                )
               )}
             </>
           )}
