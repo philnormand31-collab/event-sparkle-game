@@ -9,7 +9,7 @@ const footerLinks = {
   { name: "Event PLAYCORNER", href: "#services", serviceIndex: 3 }],
 
   company: [
-  { name: "À propos", href: "#" },
+  { name: "À propos", href: "/a-propos" },
   { name: "Portfolio", href: "/portfolio" },
   
   ],

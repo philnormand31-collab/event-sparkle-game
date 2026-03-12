@@ -61,6 +61,9 @@ const Portfolio = () => {
               <div className="mt-10">
                 <LegalDocumentsAdmin />
               </div>
+              <div className="mt-10">
+                <AboutAdmin />
+              </div>
             </>
           )}
 
