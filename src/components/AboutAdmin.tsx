@@ -37,7 +37,7 @@ export const AboutAdmin = ({ onSaved }: { onSaved?: () => void }) => {
     setSaving(true);
     const { error } = await supabase
       .from("about_page")
-      .update({ content, image_url: imageUrl })
+      .update({ content, content_side: contentSide, image_url: imageUrl } as any)
       .eq("id", rowId);
     setSaving(false);
     if (error) {
