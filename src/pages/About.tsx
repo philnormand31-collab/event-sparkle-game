@@ -8,6 +8,7 @@ import { AboutAdmin } from "@/components/AboutAdmin";
 
 const About = () => {
   const [content, setContent] = useState("");
+  const [contentSide, setContentSide] = useState("");
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const { isAdmin, loading: authLoading } = useAuth();
