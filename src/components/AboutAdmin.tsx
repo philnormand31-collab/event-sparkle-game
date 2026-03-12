@@ -43,6 +43,7 @@ export const AboutAdmin = ({ onSaved }: { onSaved?: () => void }) => {
       console.error(error);
     } else {
       toast.success("Page À propos mise à jour !");
+      onSaved?.();
     }
   };
 
