@@ -51,6 +51,7 @@ const About = () => {
 
           {loading ? (
             <div className="space-y-4">
+              <Skeleton className="h-10 w-3/4" />
               <Skeleton className="h-6 w-full" />
               <Skeleton className="h-6 w-3/4" />
               <Skeleton className="h-64 w-full rounded-2xl" />
