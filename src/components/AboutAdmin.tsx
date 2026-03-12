@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Save, Upload, Trash2, Loader2 } from "lucide-react";
 
-export const AboutAdmin = () => {
+export const AboutAdmin = ({ onSaved }: { onSaved?: () => void }) => {
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
