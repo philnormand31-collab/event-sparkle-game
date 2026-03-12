@@ -16,11 +16,12 @@ const About = () => {
   const fetchData = useCallback(async () => {
     const { data } = await supabase
       .from("about_page")
-      .select("content, image_url")
+      .select("*")
       .limit(1)
       .single();
     if (data) {
       setContent(data.content);
+      setContentSide((data as any).content_side || "");
       setImageUrl(data.image_url);
     }
     setLoading(false);
