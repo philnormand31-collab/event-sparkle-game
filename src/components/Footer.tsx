@@ -59,9 +59,9 @@ export const Footer = () => {
 
             </p>
             <div className="space-y-3">
-              <a href="mailto:contact@ludigami.com" className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors">
+              <a href="mailto:infos@ludigami.fr" className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors">
                 <Mail className="w-4 h-4" />
-                <span>contact@ludigami.com</span>
+                <span>infos@ludigami.fr</span>
               </a>
               <a href="tel:+33608558612" className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors">
                 <Phone className="w-4 h-4" />
