@@ -20,7 +20,7 @@ interface ContactDialogProps {
   bookingInfo?: BookingInfo | null;
 }
 
-const CONTACT_EMAIL = "phil.normand31@gmail.com";
+const CONTACT_EMAIL = "infos@ludigami.fr";
 const MAX_MESSAGE_LENGTH = 300;
 
 export const ContactDialog = ({ open, onOpenChange, bookingInfo }: ContactDialogProps) => {
