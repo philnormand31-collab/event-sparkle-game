@@ -167,9 +167,10 @@ export const Footer = () => {
               <Linkedin className="w-4 h-4" />
             </a>
             <a
-              href="#"
+              href="https://www.facebook.com/p/Animunjeu-61564762989351/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-10 h-10 rounded-full bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary transition-all">
-
               <Facebook className="w-4 h-4" />
             </a>
             <a
