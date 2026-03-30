@@ -19,7 +19,7 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: "Charlotte CHARLIER",
+    name: "Charlotte C.",
     role: "Responsable communication, animations",
     company: "Centre Commercial TEMPO",
     content:
