@@ -204,7 +204,9 @@ export const ContactDialog = ({ open, onOpenChange, bookingInfo }: ContactDialog
             </div>
             <h3 className="font-display text-lg font-semibold">Message envoyé !</h3>
             <p className="text-muted-foreground">
-              Merci, votre message est en attente de validation. Une confirmation vous sera envoyée rapidement par email avec le lien de connexion pour la visio !
+              {bookingInfo
+                ? "Merci, votre message est en attente de validation. Une confirmation vous sera envoyée rapidement par email avec le lien de connexion pour la visio !"
+                : "Merci pour votre message que nous allons traiter dans les meilleurs délais !"}
             </p>
             <Button variant="glass" onClick={handleClose} className="mt-4">
               Fermer
