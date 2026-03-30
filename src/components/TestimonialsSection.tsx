@@ -3,7 +3,7 @@ import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Emma THIRION",
+    name: "Emma T.",
     role: "Directrice Marketing",
     company: "IRIS PROCREA",
     content:
