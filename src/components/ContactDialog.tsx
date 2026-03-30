@@ -84,12 +84,14 @@ export const ContactDialog = ({ open, onOpenChange, bookingInfo }: ContactDialog
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[520px] bg-card border-border max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="font-display text-xl">Contactez-nous</DialogTitle>
-          <DialogDescription>
-            Remplissez le formulaire ci-dessous et nous vous répondrons rapidement.
-          </DialogDescription>
-        </DialogHeader>
+        {!sent && (
+          <DialogHeader>
+            <DialogTitle className="font-display text-xl">Contactez-nous</DialogTitle>
+            <DialogDescription>
+              Remplissez le formulaire ci-dessous et nous vous répondrons rapidement.
+            </DialogDescription>
+          </DialogHeader>
+        )}
 
         {!sent ? (
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -202,7 +204,7 @@ export const ContactDialog = ({ open, onOpenChange, bookingInfo }: ContactDialog
             </div>
             <h3 className="font-display text-lg font-semibold">Message envoyé !</h3>
             <p className="text-muted-foreground">
-              Merci pour votre message. Nous reviendrons vers vous très rapidement.
+              Merci, votre message est en attente de validation. Une confirmation vous sera envoyée rapidement par email avec le lien de connexion pour la visio !
             </p>
             <Button variant="glass" onClick={handleClose} className="mt-4">
               Fermer
