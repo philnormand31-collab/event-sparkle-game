@@ -11,7 +11,7 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: "Olivier GROUX",
+    name: "Olivier G.",
     role: "DG agence",
     company: "VIVACITY",
     content:
