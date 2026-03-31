@@ -17,6 +17,7 @@ import Portfolio from "./pages/Portfolio";
 import LegalDocument from "./pages/LegalDocument";
 import LogoDownload from "./pages/LogoDownload";
 import About from "./pages/About";
+import AdminCRM from "./pages/AdminCRM";
 
 const queryClient = new QueryClient();
 
