@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { TrendingUp, Users, Heart, Database, Shield, Zap } from "lucide-react";
 
