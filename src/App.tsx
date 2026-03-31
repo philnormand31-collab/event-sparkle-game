@@ -17,6 +17,7 @@ import Portfolio from "./pages/Portfolio";
 import LegalDocument from "./pages/LegalDocument";
 import LogoDownload from "./pages/LogoDownload";
 import About from "./pages/About";
+import AdminCRM from "./pages/AdminCRM";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/logo" element={<LogoDownload />} />
           <Route path="/a-propos" element={<About />} />
           <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/crm" element={<AdminCRM />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
