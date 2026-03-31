@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 
@@ -28,9 +29,9 @@ const testimonials = [
   },
 ];
 
-export const TestimonialsSection = () => {
+export const TestimonialsSection = React.forwardRef<HTMLElement>((props, ref) => {
   return (
-    <section className="section-padding relative">
+    <section className="section-padding relative" ref={ref} {...props}>
       <div className="absolute inset-0 bg-gradient-to-b from-background to-secondary/20" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
@@ -101,4 +102,5 @@ export const TestimonialsSection = () => {
       </div>
     </section>
   );
-};
+});
+TestimonialsSection.displayName = "TestimonialsSection";
