@@ -89,4 +89,5 @@ export const BenefitsSection = React.forwardRef<HTMLElement>((props, ref) => {
       </div>
     </section>
   );
-};
+});
+BenefitsSection.displayName = "BenefitsSection";
