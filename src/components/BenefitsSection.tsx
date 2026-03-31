@@ -35,9 +35,9 @@ const benefits = [
   },
 ];
 
-export const BenefitsSection = React.forwardRef<HTMLElement>((props, ref) => {
+export const BenefitsSection = React.forwardRef<HTMLElement, object>((_props, ref) => {
   return (
-    <section id="benefits" className="section-padding relative overflow-hidden" ref={ref} {...props}>
+    <section id="benefits" className="section-padding relative overflow-hidden" ref={ref}>
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-secondary/10 to-background" />
       <div 
