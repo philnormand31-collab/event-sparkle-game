@@ -44,6 +44,45 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_submissions: {
+        Row: {
+          created_at: string
+          email: string
+          etablissement: string
+          fonction: string
+          id: string
+          message: string | null
+          nom: string
+          prenom: string
+          source: string | null
+          telephone: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          etablissement: string
+          fonction: string
+          id?: string
+          message?: string | null
+          nom: string
+          prenom: string
+          source?: string | null
+          telephone: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          etablissement?: string
+          fonction?: string
+          id?: string
+          message?: string | null
+          nom?: string
+          prenom?: string
+          source?: string | null
+          telephone?: string
+        }
+        Relationships: []
+      }
       legal_documents: {
         Row: {
           content: string
