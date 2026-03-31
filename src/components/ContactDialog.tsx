@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Send, CheckCircle } from "lucide-react";
+import { Send, CheckCircle, Loader2 } from "lucide-react";
 import type { BookingInfo } from "@/components/BookingDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ContactDialogProps {
   open: boolean;
@@ -26,6 +27,7 @@ const MAX_MESSAGE_LENGTH = 300;
 export const ContactDialog = ({ open, onOpenChange, bookingInfo }: ContactDialogProps) => {
   const { toast } = useToast();
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     nom: "",
     prenom: "",
@@ -59,18 +61,46 @@ export const ContactDialog = ({ open, onOpenChange, bookingInfo }: ContactDialog
     form.email.trim() &&
     form.email.includes("@");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isValid) return;
+    if (!isValid || submitting) return;
 
-    const subject = encodeURIComponent(
-      `Contact LUDIGAMI — ${form.prenom} ${form.nom}`
-    );
-    const body = encodeURIComponent(
-      `Nom : ${form.nom}\nPrénom : ${form.prenom}\nFonction : ${form.fonction}\nÉtablissement : ${form.etablissement}\nTéléphone : ${form.telephone}\nE-mail : ${form.email}\n\nMessage :\n${form.message}`
-    );
-    window.open(`mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`, "_self");
-    setSent(true);
+    setSubmitting(true);
+    try {
+      // Save to database
+      const source = bookingInfo ? "visio" : "contact";
+      const { error } = await supabase.from("contact_submissions").insert({
+        nom: form.nom.trim(),
+        prenom: form.prenom.trim(),
+        fonction: form.fonction.trim(),
+        etablissement: form.etablissement.trim(),
+        telephone: form.telephone.trim(),
+        email: form.email.trim(),
+        message: form.message.trim(),
+        source,
+      });
+
+      if (error) {
+        console.error("Erreur enregistrement:", error);
+        toast({
+          title: "Erreur",
+          description: "Une erreur est survenue. Veuillez réessayer.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      setSent(true);
+    } catch (err) {
+      console.error("Erreur:", err);
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue. Veuillez réessayer.",
+        variant: "destructive",
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleClose = () => {
@@ -191,10 +221,14 @@ export const ContactDialog = ({ open, onOpenChange, bookingInfo }: ContactDialog
               variant="hero"
               size="lg"
               className="w-full"
-              disabled={!isValid}
+              disabled={!isValid || submitting}
             >
-              <Send className="w-4 h-4 mr-2" />
-              Envoyer
+              {submitting ? (
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              ) : (
+                <Send className="w-4 h-4 mr-2" />
+              )}
+              {submitting ? "Envoi en cours..." : "Envoyer"}
             </Button>
           </form>
         ) : (
