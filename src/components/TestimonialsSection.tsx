@@ -102,4 +102,5 @@ export const TestimonialsSection = React.forwardRef<HTMLElement>((props, ref) =>
       </div>
     </section>
   );
-};
+});
+TestimonialsSection.displayName = "TestimonialsSection";
