@@ -221,10 +221,14 @@ export const ContactDialog = ({ open, onOpenChange, bookingInfo }: ContactDialog
               variant="hero"
               size="lg"
               className="w-full"
-              disabled={!isValid}
+              disabled={!isValid || submitting}
             >
-              <Send className="w-4 h-4 mr-2" />
-              Envoyer
+              {submitting ? (
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              ) : (
+                <Send className="w-4 h-4 mr-2" />
+              )}
+              {submitting ? "Envoi en cours..." : "Envoyer"}
             </Button>
           </form>
         ) : (
