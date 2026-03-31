@@ -29,9 +29,9 @@ const testimonials = [
   },
 ];
 
-export const TestimonialsSection = React.forwardRef<HTMLElement>((props, ref) => {
+export const TestimonialsSection = React.forwardRef<HTMLElement, object>((_props, ref) => {
   return (
-    <section className="section-padding relative" ref={ref} {...props}>
+    <section className="section-padding relative" ref={ref}>
       <div className="absolute inset-0 bg-gradient-to-b from-background to-secondary/20" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
